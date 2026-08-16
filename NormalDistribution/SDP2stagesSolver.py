@@ -1,5 +1,5 @@
 """
-SDP-2 — Two-stage backward induction for two-location lateral transshipment.
+SDP_comparePassed-2 — Two-stage backward induction for two-location lateral transshipment.
 Reference: Ma, Rossi & Archibald (2022), equations (4)–(7).
 
 Within each period t the backward recursion runs two sub-stages:
@@ -19,7 +19,7 @@ Within each period t the backward recursion runs two sub-stages:
 Physical timeline inside period t:
     [start] → transship W → order (Q1,Q2) → demand realised → [period t+1]
 
-Equivalence with SDP-1:
+Equivalence with SDP_comparePassed-1:
     C_SDP1[t] = CnTransship[t]  for all t  (proved by backward induction;
     both value functions satisfy the same Bellman equation with the same
     terminal condition).  The two formulations differ only in the order in
@@ -32,12 +32,12 @@ from SDP1solver import (poisson_pmf, trans_cost, order_cost,
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# SDP-2 solver
+# SDP_comparePassed-2 solver
 # ─────────────────────────────────────────────────────────────────────────────
 
 class SDP2Solver:
     """
-    Two-stage backward induction for SDP-2.
+    Two-stage backward induction for SDP_comparePassed-2.
 
     Parameters: same as SDP1Solver.
     """
@@ -71,7 +71,7 @@ class SDP2Solver:
         """Run two-stage backward induction; return self."""
         for t in range(self.T - 1, -1, -1):
             if verbose:
-                print(f"  SDP-2 | period {t+1}/{self.T} ...", flush=True)
+                print(f"  SDP_comparePassed-2 | period {t+1}/{self.T} ...", flush=True)
 
             # ── Stage A: ordering ─────────────────────────────────────────
             # EC is built using CnTransship[t+1] as future cost, which is the
@@ -172,17 +172,17 @@ if __name__ == '__main__':
     max_inv      = 20
 
     print("═" * 64)
-    print("SDP-1 vs SDP-2  ·  4-period Poisson example")
+    print("SDP_comparePassed-1 vs SDP_comparePassed-2  ·  4-period Poisson example")
     print(f"  lam1 = {lam1}  lam2 = {lam2}")
     print(f"  K={K}  z={z}  R={R}  v={v}  h={h}  b={b}")
     print(f"  inventory grid : [{min_inv}, {max_inv}]  (N={max_inv-min_inv+1})")
     print("═" * 64)
 
-    print("\nSolving SDP-2 ...")
+    print("\nSolving SDP_comparePassed-2 ...")
     s2 = SDP2Solver(lam1, lam2, K, z, R, v, h, b, min_inv, max_inv)
     s2.solve()
 
-    print("\nSolving SDP-1 ...")
+    print("\nSolving SDP_comparePassed-1 ...")
     s1 = SDP1Solver(lam1, lam2, K, z, R, v, h, b, min_inv, max_inv)
     s1.solve()
 
@@ -210,7 +210,7 @@ if __name__ == '__main__':
     check_states = [(0, 0), (5, 5), (-5, 5), (10, -5), (0, 10), (-5, -5)]
     print()
     print("Value function at representative states (period 1 = t=0):")
-    print(f"  {'state':>10}  {'SDP-1':>12}  {'SDP-2':>12}  {'|diff|':>10}")
+    print(f"  {'state':>10}  {'SDP_comparePassed-1':>12}  {'SDP_comparePassed-2':>12}  {'|diff|':>10}")
     print("  " + "-" * 50)
     for (i1, i2) in check_states:
         if not (min_inv <= i1 <= max_inv and min_inv <= i2 <= max_inv):
@@ -222,8 +222,8 @@ if __name__ == '__main__':
     # ── Value function across all four periods at (0, 0) ─────────────── #
     print()
     print("Value function C[t, 0, 0] across all periods:")
-    print(f"  {'period':>8}  {'SDP-1 C[t]':>14}  {'SDP-2 Transship':>16}"
-          f"  {'SDP-2 Order':>13}  {'|diff|':>10}")
+    print(f"  {'period':>8}  {'SDP_comparePassed-1 C[t]':>14}  {'SDP_comparePassed-2 Transship':>16}"
+          f"  {'SDP_comparePassed-2 Order':>13}  {'|diff|':>10}")
     print("  " + "-" * 72)
     for t in range(4):
         v1   = s1.value(t, 0, 0)
@@ -234,12 +234,12 @@ if __name__ == '__main__':
     # ── Optimal actions at (0, 0) ─────────────────────────────────────── #
     print()
     print("Optimal actions at state (0, 0):")
-    print(f"  {'period':>8}  {'SDP-1 (W,Q1,Q2)':>18}  {'SDP-2 (W,Q1,Q2)':>18}")
+    print(f"  {'period':>8}  {'SDP_comparePassed-1 (W,Q1,Q2)':>18}  {'SDP_comparePassed-2 (W,Q1,Q2)':>18}")
     print("  " + "-" * 50)
     for t in range(4):
         W1, Q1a, Q1b = s1.action(t, 0, 0)
         W2            = s2.action_W(t, 0, 0)
-        # Post-transship state for SDP-2 action query
+        # Post-transship state for SDP_comparePassed-2 action query
         i1p = 0 - W2;  i2p = 0 + W2
         Q2a, Q2b = s2.action_Q(t, i1p, i2p)
         print(f"  t={t+1:>6}    ({W1:3d}, {Q1a:3d}, {Q1b:3d})         "
@@ -258,18 +258,18 @@ if __name__ == '__main__':
 
     # ── Full value-function slice for inspection ──────────────────────── #
     print()
-    print("CnTransship (SDP-2) = C (SDP-1) at period 1, i2 fixed at 0:")
+    print("CnTransship (SDP_comparePassed-2) = C (SDP_comparePassed-1) at period 1, i2 fixed at 0:")
     i2_fixed = 0
     i1_range = range(min_inv, max_inv + 1, 3)
     print(f"  {'i1':>5}", end="")
     for i1 in i1_range:
         print(f"  {i1:8d}", end="")
     print()
-    print(f"  {'SDP-1':>5}", end="")
+    print(f"  {'SDP_comparePassed-1':>5}", end="")
     for i1 in i1_range:
         print(f"  {s1.value(0, i1, i2_fixed):8.3f}", end="")
     print()
-    print(f"  {'SDP-2':>5}", end="")
+    print(f"  {'SDP_comparePassed-2':>5}", end="")
     for i1 in i1_range:
         print(f"  {s2.value(0, i1, i2_fixed):8.3f}", end="")
     print()

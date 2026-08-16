@@ -1,5 +1,5 @@
 """
-SDP-1 — Joint stochastic dynamic programme for two-location lateral transshipment.
+SDP_comparePassed-1 — Joint stochastic dynamic programme for two-location lateral transshipment.
 Reference: Ma, Rossi & Archibald (2022), equations (1)–(3).
 
 State       (i1, i2)         pre-transshipment inventory at both locations.
@@ -87,12 +87,12 @@ def build_EC(C_next: np.ndarray,
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# SDP-1 solver
+# SDP_comparePassed-1 solver
 # ─────────────────────────────────────────────────────────────────────────────
 
 class SDP1Solver:
     """
-    Backward induction for SDP-1.
+    Backward induction for SDP_comparePassed-1.
 
     For every (state, period), all feasible (W, Q1, Q2) triples are enumerated
     jointly.  Within each W, the inner optimisation over (Q1, Q2) is fully
@@ -136,7 +136,7 @@ class SDP1Solver:
         """Run backward induction; return self for chaining."""
         for t in range(self.T - 1, -1, -1):
             if verbose:
-                print(f"  SDP-1 | period {t+1}/{self.T} ...", flush=True)
+                print(f"  SDP_comparePassed-1 | period {t+1}/{self.T} ...", flush=True)
 
             # Build EC once per period (shared across all states and W values)
             EC = build_EC(self.C[t + 1], self.pmf1[t], self.pmf2[t],
@@ -229,7 +229,7 @@ if __name__ == '__main__':
     max_inv      = 20
 
     print("═" * 60)
-    print("SDP-1  ·  4-period Poisson example")
+    print("SDP_comparePassed-1  ·  4-period Poisson example")
     print(f"  lam1 = {lam1}")
     print(f"  lam2 = {lam2}")
     print(f"  K={K}  z={z}  R={R}  v={v}  h={h}  b={b}")
