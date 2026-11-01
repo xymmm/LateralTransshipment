@@ -20,6 +20,14 @@ state in the simulation reuse it. This is a cache of the same rule, not a change
 refine=False gives the variant without refinement (W~_k = W^_k), useful to measure what the refinement adds.
 
 OptimalPolicy wraps an lt_sdp.SDPResult and returns its optimal action at (k, i1, i2).
+
+QuasiMyopicPolicy is the benchmark built on Glazebrook, Paterson, Rauscher & Archibald (2015): the transshipment is
+chosen as if no transshipment will ever be made again, i.e. one policy improvement step from the policy without
+transshipment. Without transshipment the two locations are independent and their optimal costs are the single-location
+values V^1_k, V^2_k of sdp_single.SDP_single, so at period k
+       W_k = argmin_{W in R_k(i)}  u(|W|) + V^1_k(i1 - W) + V^2_k(i2 + W),
+and each location then orders by its own optimal single-location policy at the post-transshipment inventory.
+Candidates W are scanned in ascending order and the first minimum is kept.
 """
 from __future__ import annotations
 
@@ -129,3 +137,35 @@ class OptimalPolicy:
         if not (self.lo <= i1 <= self.hi and self.lo <= i2 <= self.hi):
             raise IndexError(f"state ({i1}, {i2}) at period {k} is outside the SDP grid [{self.lo}, {self.hi}]")
         return self.res.action(i1, i2, period=k)
+
+
+class QuasiMyopicPolicy:
+    """Benchmark: one policy improvement step from the optimal policy without transshipment (see the module docstring).
+    sol1, sol2 are sdp_single.SingleResult on the same grid; states whose post-transshipment inventory would leave the
+    grid are refused."""
+
+    def __init__(self, sol1, sol2, R: float, v: float):
+        if sol1.min_inventory != sol2.min_inventory or len(sol1.grid) != len(sol2.grid):
+            raise ValueError("the two single-location solutions must use the same grid")
+        self.s1, self.s2 = sol1, sol2
+        self.lo, self.hi = int(sol1.grid[0]), int(sol1.grid[-1])
+        self.R, self.v = R, v
+        self.cache: Dict[Tuple[int, int, int], Tuple[int, int, int]] = {}
+
+    def decide(self, k: int, i1: int, i2: int) -> Tuple[int, int, int]:
+        key = (k, int(i1), int(i2))
+        hit = self.cache.get(key)
+        if hit is not None:
+            return hit
+        lo, hi, t = self.lo, self.hi, k - 1
+        Wc = np.arange(-max(i2, 0), max(i1, 0) + 1)                       # R_k(i), ascending
+        x1, x2 = i1 - Wc, i2 + Wc
+        ok = (x1 >= lo) & (x1 <= hi) & (x2 >= lo) & (x2 <= hi)
+        if not ok.any():
+            raise IndexError(f"state ({i1}, {i2}) at period {k} is outside the grid [{lo}, {hi}]")
+        Wc, x1, x2 = Wc[ok], x1[ok], x2[ok]
+        val = _u(Wc, self.R, self.v) + self.s1.C[t, x1 - lo] + self.s2.C[t, x2 - lo]
+        j = int(np.argmin(val))                                            # first minimum
+        dec = (int(Wc[j]), int(self.s1.Q[t, x1[j] - lo]), int(self.s2.Q[t, x2[j] - lo]))
+        self.cache[key] = dec
+        return dec

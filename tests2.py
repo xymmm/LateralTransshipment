@@ -8,6 +8,7 @@ tests2.py : checks of milp1.py, policies.py and simulate.py. Run before the expe
     4  MILP-1 is a lower bound: its objective never exceeds the exact expected cost of its own decisions
     5  C^pi_k of policies.py against an independent forward recursion with the decisions fixed
     6  simulator: the simulated cost of the SDP-2 optimal policy agrees with the SDP-2 value
+    7  sdp_single: without transshipment (R very large) SDP-2 equals the sum of the two single-location SDPs
 """
 from __future__ import annotations
 
@@ -185,6 +186,21 @@ def test_simulator():
               f"sim {sim.mean:.4f} +- {sim.half_width:.4f} ({sim.n} paths), SDP-2 {res.value():.4f}, z = {zscore:.2f}")
 
 
+# 7 -------------------------------------------------------------------------------------------------------
+def test_single():
+    from sdp_single import SDP_single
+    costs = dict(K=20, z=1, h=1, b=5)
+    mu1, mu2 = [4, 6, 8, 6], [7, 3, 2, 5]
+    for dist, cv in (("poisson", None), ("normal", 0.3)):
+        s = SDP2(mu1, mu2, -20, 60, R=1e9, v=1, distribution=dist, cv=cv, **costs)
+        a = SDP_single(mu1, -20, 60, distribution=dist, cv=cv, **costs)
+        c = SDP_single(mu2, -20, 60, distribution=dist, cv=cv, **costs)
+        diff = np.max(np.abs(s.C - (a.C[:, :, None] + c.C[:, None, :])))
+        same = np.mean((s.QA == a.Q[:, :, None]) & (s.QB == c.Q[:, None, :]))
+        check(f"7  SDP-2 without transshipment = two single-location SDPs, {dist}", diff < 1e-9 and same == 1,
+              f"max diff {diff:.1e}, identical orders {same:.0%}")
+
+
 if __name__ == "__main__":
     test_partitions()
     test_loss()
@@ -192,4 +208,5 @@ if __name__ == "__main__":
     test_lower_bound()
     test_value_fixed()
     test_simulator()
+    test_single()
     print(f"\n{sum(OK)} of {len(OK)} checks passed")

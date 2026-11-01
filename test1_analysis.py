@@ -39,7 +39,8 @@ def latex(df: pd.DataFrame, caption: str, label: str, fmt: dict) -> str:
     return "\n".join(lines)
 
 
-FMT = {"instances": "{:.0f}", "N": "{:.0f}", "T": "{:.0f}", "M": "{:g}",
+I_COL = "$|\\mathcal{I}|$"                 # number of states (i1, i2) = (inventory levels per location)^2
+FMT = {"instances": "{:.0f}", I_COL: "{:.0f}", "T": "{:.0f}", "M": "{:g}",
        "SDP-1 (s)": "{:.2f}", "SDP-2 (s)": "{:.2f}", "SDP-1 / SDP-2": "{:.1f}", "SDP-1 - SDP-2 (s)": "{:.2f}",
        "max abs diff": "{:.1e}", "max rel diff at (0,0)": "{:.1e}",
        "instances with identical policy (%)": "{:.1f}", "states with a tie": "{:.0f}"}
@@ -70,7 +71,7 @@ def equality_row(label, g):
 def time_row(keys, g):
     return {**keys,
             "instances": len(g),
-            "N": g["N"].mean(),
+            I_COL: (g["N"] ** 2).mean(),
             "SDP-1 (s)": g["time_sdp1"].mean(),
             "SDP-2 (s)": g["time_sdp2"].mean(),
             "SDP-1 - SDP-2 (s)": (g["time_sdp1"] - g["time_sdp2"]).mean(),
