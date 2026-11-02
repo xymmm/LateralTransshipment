@@ -6,13 +6,16 @@ test2_analysis.py : tables and figures from the csv files written by test2_exper
           table  test2_T_matched       T = 4, 8, 12 on the 180 settings that block Aplus shares with block A
           table  test2_pivot           average gap pivoting each parameter, as Tables 1 and 2 of the 2022 version:
                                        horizon, distribution, demand pattern of location 1, identical or different
-                                       patterns, K, R, b, (z, v); one column per horizon, and "all (T=4, 8)" over
-                                       block A only, since block Aplus covers 5 of the 20 pattern pairs
+                                       patterns, K, R, b, (z, v); one column per horizon and one over all instances
+                                       of blocks A and Aplus, which form one test set (Aplus covers 5 of the 20
+                                       pattern pairs at T = 12)
           figure test2_box_pattern     box plots of the gap by demand pattern of location 1, one panel per horizon
           figure test2_box_cost        box plots of the gap by K, R, b and (z, v)
           figure test2_box_dist        box plots of the gap by distribution, one panel per horizon
     Q2  computing time
           table  test2_Q2_time         SDP-2 and one decision of Algorithm 1, by horizon and distribution (A, Aplus)
+          table  test2_Q2_pivot        the same test set pivoted like test2_pivot: for every level of every parameter
+                                       and every horizon, SDP-2 complete solve, one decision and decision at k=1
     Q3  computing time as the state space and the horizon grow (block C, full factorial)
           table  test2_Q3_time         SDP-2 complete solve and Algorithm 1 decisions for every distribution, state space
                                        level and T: wall time and CPU time
@@ -88,9 +91,36 @@ def ordered(values, order):
     return [x for x in order if x in set(values)] + sorted(set(values) - set(order), key=str)
 
 
+def pivot_params(A, AA):
+    return [("distribution", "distribution", ordered(AA["distribution"].unique(), DIST_ORDER)),
+            ("demand pattern of location 1", "pat1", ordered(AA["pat1"].unique(), PATTERN_ORDER)),
+            ("patterns of the two locations", "pair_type", ["identical", "different"]),
+            ("fixed ordering cost K", "K", sorted(AA["K"].unique())),
+            ("fixed transshipment cost R", "R", sorted(AA["R"].unique())),
+            ("backorder cost b", "b", sorted(AA["b"].unique())),
+            ("unit costs (z, v)", "zv", ordered(AA["zv"].unique(), []))]
+
+
+def time_pivot(AA):
+    """Mean wall time for every level of every parameter and every horizon on blocks A and Aplus."""
+    horizons = sorted(AA["T"].unique())
+    cols = [("SDP-2", "seconds_sdp2"), ("one decision", "seconds_per_decision"), ("k=1", "seconds_per_decision_k1")]
+    rows = []
+    for label, col, levels in pivot_params(None, AA) + [("all instances", None, ["all"])]:
+        for lev in levels:
+            g = AA if col is None else AA[AA[col] == lev]
+            r = {"parameter": label, "level": lev}
+            for T in horizons:
+                gT = g[g["T"] == T]
+                for name, c in cols:
+                    r[f"T={T} {name} (s)"] = gT[c].mean() if len(gT) else np.nan
+            rows.append(r)
+    return pd.DataFrame(rows)
+
+
 def pivot_table(A, AA):
-    """Average gap for every level of every parameter: one column per horizon (blocks A and Aplus, AA) and one over
-    block A only (A), whose design is balanced."""
+    """Average gap for every level of every parameter: one column per horizon and one over all instances of blocks
+    A and Aplus (AA), which form one test set."""
     horizons = sorted(AA["T"].unique())
     params = [("horizon T", "T", sorted(A["T"].unique())),
               ("distribution", "distribution", ordered(A["distribution"].unique(), DIST_ORDER)),
@@ -112,7 +142,7 @@ def pivot_table(A, AA):
             for T in horizons:
                 gT = g[g["T"] == T]
                 r[f"T={T}"] = gT["gap_pct"].mean() if len(gT) else np.nan
-            r["all (T=4, 8)"] = gA["gap_pct"].mean() if len(gA) else np.nan
+            r["all"] = g["gap_pct"].mean()
             rows.append(r)
     return pd.DataFrame(rows)
 
@@ -221,8 +251,8 @@ def main():
             params = [("K", "K"), ("R", "R"), ("b", "b"), ("(z, v)", "zv")]
             f, axes = plt.subplots(1, len(params), figsize=(8.4, 2.8), sharey=True)
             for ax, (lab, col) in zip(axes, params):
-                levs = sorted(A[col].unique(), key=str) if col == "zv" else sorted(A[col].unique())
-                boxes(ax, [A.loc[A[col] == x, "gap_pct"] for x in levs], [str(x) for x in levs], lab)
+                levs = sorted(AA[col].unique(), key=str) if col == "zv" else sorted(AA[col].unique())
+                boxes(ax, [AA.loc[AA[col] == x, "gap_pct"] for x in levs], [str(x) for x in levs], lab)
             axes[0].set_ylabel("optimality gap (%)", fontsize=8)
             savefig(f, "test2_box_cost")
 
@@ -239,6 +269,8 @@ def main():
         rows = [time_row({"T": T, "distribution": d}, g[g["distribution"] == d])
                 for T, g in AA.groupby("T") for d in ordered(g["distribution"].unique(), DIST_ORDER)]
         save(pd.DataFrame(rows), "test2_Q2_time", "Computing time of SDP-2 and of one decision of Algorithm 1.", tab)
+        save(time_pivot(AA), "test2_Q2_pivot",
+             "Average computing time in seconds of SDP-2 and of Algorithm 1 under pivoting parameters.", tab)
         if "workers" in AA and (AA["workers"] > 1).any():
             print("note: block A ran in parallel processes; its times include the effect of the shared machine")
 
