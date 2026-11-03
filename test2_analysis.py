@@ -23,6 +23,7 @@ test2_analysis.py : tables and figures from the csv files written by test2_exper
                                        log |I| (decision of period 1, MILP-1 over the whole horizon)
           figure test2_Q3_time         time against |I|, one line per T, SDP-2 and Algorithm 1 side by side
           figure test2_Q3_map          where each method fits a time budget in the (|I|, T) plane, from the fitted laws
+          figure test2_Q3_map_simple   the same map for a budget of one hour only, with the four regions labelled
 
 |I| denotes the number of states (i1, i2) of SDP-2, i.e. the square of the number of inventory levels per location.
 The comparison in Q2 and Q3 is between the complete SDP-2 solve, which must finish before the first decision can be
@@ -190,16 +191,26 @@ def main():
     def savefig(f, name):
         f.tight_layout()
         for ext in ("pdf", "png"):
-            f.savefig(os.path.join(fig, f"{name}.{ext}"), dpi=200)
+            f.savefig(os.path.join(fig, f"{name}.{ext}"), dpi=300)
         plt.close(f)
         print(f"figure: {fig}/{name}.pdf")
 
+    # figures are drawn at the width of the text (about 6.5 in), so that 8 pt in the figure is 8 pt on the page
+    TEXT_WIDTH = 6.5
+
+    def short(d):
+        return "Poisson" if d == "Poisson" else "$\\rho$ = " + d.split("=")[-1]
+
     def boxes(ax, data, labels, title):
-        ax.boxplot(data, showfliers=True, widths=0.6, flierprops=dict(markersize=2))
+        ax.boxplot(data, showfliers=True, widths=0.6, flierprops=dict(markersize=2, markeredgewidth=0.5),
+                   medianprops=dict(color="C0", linewidth=1.2), boxprops=dict(linewidth=0.8),
+                   whiskerprops=dict(linewidth=0.8), capprops=dict(linewidth=0.8))
         ax.set_xticks(range(1, len(labels) + 1))
-        ax.set_xticklabels(labels, rotation=45 if len(labels) > 4 else 0, fontsize=7, ha="right" if len(labels) > 4 else "center")
+        rot = 90 if len(labels) > 6 else 0
+        ax.set_xticklabels(labels, rotation=rot, fontsize=7)
         ax.set_title(title, fontsize=8)
         ax.tick_params(axis="y", labelsize=7)
+        ax.grid(axis="y", linewidth=0.3, alpha=0.5)
 
     # Q1 ----------------------------------------------------------------------------------------------
     rows = []
@@ -240,7 +251,7 @@ def main():
 
         if plt is not None:
             Ts = sorted(AA["T"].unique())
-            f, axes = plt.subplots(1, len(Ts), figsize=(4.2 * len(Ts), 3), sharey=True, squeeze=False)
+            f, axes = plt.subplots(1, len(Ts), figsize=(TEXT_WIDTH, 2.5), sharey=True, squeeze=False)
             for ax, T in zip(axes[0], Ts):
                 g = AA[AA["T"] == T]
                 labs = ordered(g["pat1"].unique(), PATTERN_ORDER)
@@ -249,18 +260,18 @@ def main():
             savefig(f, "test2_box_pattern")
 
             params = [("K", "K"), ("R", "R"), ("b", "b"), ("(z, v)", "zv")]
-            f, axes = plt.subplots(1, len(params), figsize=(8.4, 2.8), sharey=True)
+            f, axes = plt.subplots(1, len(params), figsize=(TEXT_WIDTH, 2.3), sharey=True)
             for ax, (lab, col) in zip(axes, params):
                 levs = sorted(AA[col].unique(), key=str) if col == "zv" else sorted(AA[col].unique())
                 boxes(ax, [AA.loc[AA[col] == x, "gap_pct"] for x in levs], [str(x) for x in levs], lab)
             axes[0].set_ylabel("optimality gap (%)", fontsize=8)
             savefig(f, "test2_box_cost")
 
-            f, axes = plt.subplots(1, len(Ts), figsize=(4.2 * len(Ts), 3), sharey=True, squeeze=False)
+            f, axes = plt.subplots(1, len(Ts), figsize=(TEXT_WIDTH, 2.3), sharey=True, squeeze=False)
             for ax, T in zip(axes[0], Ts):
                 g = AA[AA["T"] == T]
                 labs = ordered(g["distribution"].unique(), DIST_ORDER)
-                boxes(ax, [g.loc[g["distribution"] == d, "gap_pct"] for d in labs], labs, f"T = {T}")
+                boxes(ax, [g.loc[g["distribution"] == d, "gap_pct"] for d in labs], [short(d) for d in labs], f"T = {T}")
             axes[0][0].set_ylabel("optimality gap (%)", fontsize=8)
             savefig(f, "test2_box_dist")
 
@@ -314,7 +325,7 @@ def main():
 
         if plt is not None:
             Ts = sorted(C3["T"].unique())
-            f, axes = plt.subplots(1, 2, figsize=(9, 3.4), sharey=True)
+            f, axes = plt.subplots(1, 2, figsize=(TEXT_WIDTH, 2.8), sharey=True)
             for ax, col, title in ((axes[0], "cpu_sdp2", "SDP-2, complete solve"),
                                    (axes[1], "cpu_decision_k1", "Algorithm 1, decision of period 1")):
                 for T, ls in zip(Ts, ("-", "--", "-.", ":")):
@@ -335,7 +346,7 @@ def main():
             sdp = np.exp(cs[0] + cs[1] * np.log(TT) + cs[2] * np.log(II))
             dec = np.exp(cd[0] + cd[1] * TT + cd[2] * np.log(II))
             from matplotlib.lines import Line2D
-            f, ax = plt.subplots(figsize=(5.5, 4))
+            f, ax = plt.subplots(figsize=(0.75 * TEXT_WIDTH, 3.6))
             handles = []
             for (bud, lab), ls in zip(BUDGETS, (":", "--", "-")):
                 ax.contour(II, TT, sdp, levels=[bud], colors="C3", linestyles=ls)
@@ -351,6 +362,38 @@ def main():
             ax.legend(handles=handles, frameon=False, fontsize=6, loc="upper right")
             ax.tick_params(labelsize=7)
             savefig(f, "test2_Q3_map")
+
+            # simple map: one budget of one hour, four regions labelled in the plot
+            B, Tmax = 3600.0, 60
+            I1 = np.logspace(np.log10(4e3), np.log10(3e6), 400)
+            T_sdp = np.exp((np.log(B) - cs[0] - cs[2] * np.log(I1)) / cs[1])       # SDP-2 reaches one hour
+            T_alg = (np.log(B) - cd[0] - cd[2] * np.log(I1)) / cd[1]                # Algorithm 1 reaches one hour
+            red, blue = "#c0392b", "#1f5f99"
+            f, ax = plt.subplots(figsize=(0.75 * TEXT_WIDTH, 3.2))
+            ax.fill_between(I1, 0, np.minimum(np.minimum(T_sdp, T_alg), Tmax), color="0.88", lw=0)
+            ax.fill_between(I1, np.minimum(T_sdp, T_alg), np.minimum(T_alg, Tmax), where=T_alg > T_sdp,
+                            color="#cfe0f1", lw=0)
+            ax.fill_between(I1, np.minimum(T_alg, Tmax), np.minimum(T_sdp, Tmax), where=T_sdp > T_alg,
+                            color="#f6d3d1", lw=0)
+            ax.plot(I1, np.minimum(T_sdp, Tmax + 5), color=red, lw=1.4)
+            ax.plot(I1, T_alg, color=blue, lw=1.4)
+            ax.scatter(C3["I"], C3["T"], s=6, color="0.25", zorder=3, lw=0)
+            ax.set_xscale("log")
+            ax.set_xlim(4e3, 3e6)
+            ax.set_ylim(0, Tmax)
+            ax.set_xlabel("number of states $|\\mathcal{I}|$", fontsize=8)
+            ax.set_ylabel("planning horizon $T$", fontsize=8)
+            ax.text(2.2e4, 22.5, "both within one hour", ha="center", va="center", fontsize=7.5)
+            ax.text(9.0e5, 12, "Algorithm 1 only", ha="center", va="center", fontsize=7.5, color=blue)
+            ax.text(1.2e4, 48, "SDP-2 only", ha="center", va="center", fontsize=7.5, color=red)
+            ax.text(9.0e5, 48, "out of time budget", ha="center", va="center", fontsize=7.5, color="0.35")
+            ax.text(1.55e5, 57, "SDP-2, complete solve", ha="left", va="top", fontsize=7, color=red)
+            ax.text(4.5e3, T_alg[0] + 1.3, "Algorithm 1, decision of period 1", ha="left", va="bottom", fontsize=7,
+                    color=blue)
+            for side in ("top", "right"):
+                ax.spines[side].set_visible(False)
+            ax.tick_params(labelsize=7)
+            savefig(f, "test2_Q3_map_simple")
 
 
 if __name__ == "__main__":
