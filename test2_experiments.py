@@ -45,6 +45,16 @@ Block C : computing time, 80 instances, full factorial                          
     of one instance always run in the same process one after the other; the CPU times are the cleaner measure when
     several processes share the machine. About 11 hours in one process. The earlier 12-instance version of block C
     is kept in results_test2/C_old_design.csv.
+Block Chorizon : time of Algorithm 1 over the horizon, the 80 instances of block C                  -> Q3
+    Algorithm 1 is run along H_PATHS demand paths (the first H_PATHS paths of the seed, so the first 10 are the
+    paths of block C) and the CPU time of each of its T decisions is recorded at the state where it is computed.
+    The horizon time of a path is the sum of the times of the T decisions made along it, i.e. the time a decision
+    maker who follows Algorithm 1 spends over the whole horizon on that demand path; the csv holds its mean, median,
+    maximum and minimum over the paths, the decision of period 1 at (0, 0) separately, the mean and maximum time of
+    the decisions of each period, and the number of distinct decisions computed. No SDP-2 solve (its time is in
+    C.csv, same instances, same grid [-D, 2D]) and no simulation of the expected cost. Runs in H_WORKERS processes;
+    about 20 CPU hours in total, the longest instance (LCY2, s = 1, T = 16) about 2 hours, so about 3-4 hours with
+    8 processes. Results in results_test2/Chorizon.csv with its own columns (H_FIELDS).
 Demand means are the fixed integers of test1_experiments.DEMAND_PATTERNS for (M, T) = (7, 4) and (7, 8); blocks B
 and C use integer multiples of them, and blocks Aplus and C also use (7, 12) and (7, 16). Opening inventory (0, 0)
 throughout. Blocks with simulation stop at T = 12 because the time to solve MILP-1 grows quickly with the residual
@@ -78,11 +88,13 @@ for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "VECLIB
 
 # ====================================================================================================
 # settings for clicking "Run" in PyCharm; command-line arguments override them
-RUN_BLOCK = "Aplus"      # "A", "Aplus", "B", "C", or "all" (= A, then B)
+RUN_BLOCK = "Chorizon"   # "A", "Aplus", "B", "C", "Chorizon", or "all" (= A, then B)
 RUN_QUICK = False        # True: a few instances per block, to check that everything runs
 RUN_NO_REFINE = False    # True: also simulate Algorithm 1 without the refinement step on the same paths
 N_WORKERS = 8            # parallel processes for blocks A and Aplus (the M4 Pro has 12 cores); B always uses 1
 C_WORKERS = 4            # parallel processes for block C (1 = cleanest timing, about 11 hours)
+H_WORKERS = 8            # parallel processes for block Chorizon (about 3-4 hours with 8)
+H_PATHS = 100            # demand paths along which the T decisions of Algorithm 1 are timed in block Chorizon
 # ====================================================================================================
 
 import argparse
@@ -150,11 +162,13 @@ def instances(block, quick=False):
                 for (d, c), s, p in itertools.product(B_DISTRIBUTIONS, B_SCALES, B_PATTERNS)]
         if quick:
             rows = rows[:1]
-    elif block == "C":
+    elif block in ("C", "Chorizon"):
         rows = [dict(T=T, dist=d, cv=c, scale=sc, pat1=p, pat2=p, **COSTS_DEFAULT)
                 for d, c in C_DISTRIBUTIONS for sc in C_SCALES[d] for T in C_HORIZONS for p in C_PATTERNS]
+        if block == "Chorizon":                                   # longest instances first, so the pool stays busy
+            rows.sort(key=lambda r: (-r["T"], r["scale"]))
         if quick:
-            rows = rows[:1]
+            rows = rows[:1] if block == "C" else [r for r in rows if r["T"] == 4][:2]
     else:
         raise ValueError(block)
     for r in rows:
@@ -176,6 +190,13 @@ FIELDS = ["id", "block", "dist", "cv", "M", "T", "scale", "pat1", "pat2", "pair_
           "etc_noref", "gap_noref_pct", "paired_alg_minus_noref_pct", "paired_hw_alg_minus_noref_pct", "workers",
           "states", "cpu_sdp2", "cpu_decision_k1", "seconds_decision_k1", "cpu_per_decision"]
 
+# block Chorizon has its own columns; CPU time of the process unless the name says seconds (wall time)
+H_FIELDS = ["id", "block", "dist", "cv", "M", "T", "scale", "pat1", "pat2", "pair_type", "mu1", "mu2",
+            "K", "z", "R", "v", "h", "b", "lo", "hi", "N", "states", "paths", "decisions",
+            "first_decision_alg", "cpu_decision_k1", "seconds_decision_k1",
+            "cpu_horizon_mean", "cpu_horizon_median", "cpu_horizon_max", "cpu_horizon_min", "seconds_horizon_mean",
+            "cpu_period_mean", "cpu_period_max", "cpu_total", "seconds_total", "workers"]
+
 
 def done_ids(path):
     if not os.path.exists(path):
@@ -184,13 +205,13 @@ def done_ids(path):
         return {r["id"] for r in csv.DictReader(f)}
 
 
-def append(path, row):
+def append(path, row, fields=FIELDS):
     new = not os.path.exists(path)
     with open(path, "a", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=FIELDS)
+        w = csv.DictWriter(f, fieldnames=fields)
         if new:
             w.writeheader()
-        w.writerow({k: row.get(k, "") for k in FIELDS})
+        w.writerow({k: row.get(k, "") for k in fields})
 
 
 def means(inst):
@@ -280,6 +301,61 @@ def run_timing(inst, env):
     return row
 
 
+class _TimedPolicy:
+    """Wraps RecedingHorizonPolicy: CPU and wall time of the first computation of each decision (k, i1, i2).
+    Later visits of the same state are cache hits of the policy and cost nothing, but a decision maker who meets
+    the state pays the time once, so the horizon time of a path charges every decision at its computation time."""
+
+    def __init__(self, pol):
+        self.pol, self.cpu, self.wall = pol, {}, {}
+
+    def decide(self, k, i1, i2):
+        key = (k, int(i1), int(i2))
+        if key in self.cpu:
+            return self.pol.decide(k, i1, i2)
+        c0, t0 = time.process_time(), time.perf_counter()
+        dec = self.pol.decide(k, i1, i2)
+        self.cpu[key], self.wall[key] = time.process_time() - c0, time.perf_counter() - t0
+        return dec
+
+
+def run_horizon(inst, env):
+    """Block Chorizon: Algorithm 1 along H_PATHS demand paths; the time of the T decisions of each path."""
+    costs = {k: inst[k] for k in ("K", "z", "R", "v", "h", "b")}
+    mu1, mu2 = means(inst)
+    dist, cv, T = inst["dist"], inst["cv"], inst["T"]
+    row = new_row(inst, mu1, mu2)
+    D = max_demand(mu1, mu2, dist, cv)
+    row.update(lo=-D, hi=2 * D, N=3 * D + 1, states=(3 * D + 1) ** 2, paths=H_PATHS)
+    pm1, pm2 = period_pmfs(mu1, dist, cv), period_pmfs(mu2, dist, cv)
+    pol = _TimedPolicy(RecedingHorizonPolicy(pm1, pm2, **costs, distribution=dist, env=env))
+    c_all, t_all = time.process_time(), time.perf_counter()
+    first = pol.decide(1, 0, 0)                               # period 1 at (0, 0): MILP-1 over the whole horizon
+    row.update(first_decision_alg=str(first), cpu_decision_k1=pol.cpu[(1, 0, 0)], seconds_decision_k1=pol.wall[(1, 0, 0)])
+    D1, D2 = demand_batch(pm1, pm2, 1000, SEED, 0)            # the same paths as block C and the simulations
+    D1, D2 = D1[:H_PATHS], D2[:H_PATHS]
+    n = len(D1)
+    x1, x2 = np.zeros(n, dtype=np.int64), np.zeros(n, dtype=np.int64)
+    cpu_path, wall_path = np.zeros(n), np.zeros(n)
+    for k in range(1, T + 1):
+        dec = np.array([pol.decide(k, int(a), int(c)) for a, c in zip(x1, x2)], dtype=np.int64)
+        cpu_path += [pol.cpu[(k, int(a), int(c))] for a, c in zip(x1, x2)]
+        wall_path += [pol.wall[(k, int(a), int(c))] for a, c in zip(x1, x2)]
+        x1 = x1 - dec[:, 0] + dec[:, 1] - D1[:, k - 1]
+        x2 = x2 + dec[:, 0] + dec[:, 2] - D2[:, k - 1]
+    per_k = [[v for (kk, _, _), v in pol.cpu.items() if kk == k] for k in range(1, T + 1)]
+    row.update(decisions=len(pol.cpu),
+               cpu_horizon_mean=float(cpu_path.mean()), cpu_horizon_median=float(np.median(cpu_path)),
+               cpu_horizon_max=float(cpu_path.max()), cpu_horizon_min=float(cpu_path.min()),
+               seconds_horizon_mean=float(wall_path.mean()),
+               cpu_period_mean=" ".join(f"{np.mean(v):.4f}" for v in per_k),
+               cpu_period_max=" ".join(f"{np.max(v):.4f}" for v in per_k),
+               cpu_total=time.process_time() - c_all, seconds_total=time.perf_counter() - t_all)
+    for mdl in pol.pol._milp.values():
+        mdl.model.dispose()
+    return row
+
+
 # -- parallel workers (block A) ------------------------------------------------------------------------
 _ENV = None
 
@@ -294,12 +370,20 @@ def _work(args):
     try:
         if inst["block"] == "C":
             return run_timing(inst, _ENV), None
+        if inst["block"] == "Chorizon":
+            return run_horizon(inst, _ENV), None
         return run_instance(inst, no_refine, _ENV), None
     except Exception as e:                                   # report and continue with the other instances
         return None, f"{instance_id(inst)}: {type(e).__name__}: {e}"
 
 
 def report(block, n, total, inst, row, t_inst):
+    if block == "Chorizon":
+        print(f"[Chorizon {n}/{total}] {inst['dist']} cv={inst['cv']} s={inst['scale']} T={inst['T']} {inst['pat1']}  "
+              f"{row['decisions']} decisions  period 1 {row['cpu_decision_k1']:.2f}s  "
+              f"horizon mean {row['cpu_horizon_mean']:.2f}s max {row['cpu_horizon_max']:.2f}s  "
+              f"instance {row['seconds_total']:.0f}s  {t_inst}", flush=True)
+        return
     if block == "C":
         print(f"[C {n}/{total}] {inst['dist']} cv={inst['cv']} s={inst['scale']} T={inst['T']} {inst['pat1']}  "
               f"|I|={row['states']}  SDP-2 {row['seconds_sdp2']:.1f}s (CPU {row['cpu_sdp2']:.1f}s)  "
@@ -317,7 +401,9 @@ def run_block(block, quick, no_refine, out_dir, workers):
     path = os.path.join(out_dir, f"{block}.csv")
     done = done_ids(path)
     insts = [i for i in instances(block, quick) if instance_id(i) not in done]
-    workers = workers if block in ("A", "Aplus") else (C_WORKERS if block == "C" else 1)
+    workers = {"A": workers, "Aplus": workers, "C": C_WORKERS, "Chorizon": H_WORKERS}.get(block, 1)
+    fields = H_FIELDS if block == "Chorizon" else FIELDS
+    run = {"C": run_timing, "Chorizon": run_horizon}.get(block)
     print(f"block {block}: {len(insts)} instances to run, {workers} process(es), results in {path}", flush=True)
     if not insts:
         return
@@ -326,9 +412,9 @@ def run_block(block, quick, no_refine, out_dir, workers):
         env = gurobi_env()
         for n, inst in enumerate(insts, 1):
             t0 = time.perf_counter()
-            row = run_timing(inst, env) if block == "C" else run_instance(inst, no_refine, env)
+            row = run(inst, env) if run is not None else run_instance(inst, no_refine, env)
             row["workers"] = 1
-            append(path, row)
+            append(path, row, fields)
             report(block, n, len(insts), inst, row, f"instance {time.perf_counter() - t0:.0f}s")
         env.dispose()
         return
@@ -338,7 +424,7 @@ def run_block(block, quick, no_refine, out_dir, workers):
                 print(f"[{block} {n}/{len(insts)}] FAILED {err}", flush=True)
                 continue
             row["workers"] = workers
-            append(path, row)
+            append(path, row, fields)
             inst = {k: row[k] for k in ("T", "dist", "cv", "scale", "pat1", "pat2", "K", "z", "R", "v", "b")}
             if block == "C":
                 report(block, n, len(insts), inst, row, "")

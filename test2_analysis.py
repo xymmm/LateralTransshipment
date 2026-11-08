@@ -386,7 +386,7 @@ def main():
             ax.text(2.2e4, 22.5, "both within one hour", ha="center", va="center", fontsize=7.5)
             ax.text(9.0e5, 12, "Algorithm 1 only", ha="center", va="center", fontsize=7.5, color=blue)
             ax.text(1.2e4, 48, "SDP-2 only", ha="center", va="center", fontsize=7.5, color=red)
-            ax.text(9.0e5, 48, "out of time budget", ha="center", va="center", fontsize=7.5, color="0.35")
+            ax.text(9.0e5, 48, "neither", ha="center", va="center", fontsize=7.5, color="0.35")
             ax.text(1.55e5, 57, "SDP-2, complete solve", ha="left", va="top", fontsize=7, color=red)
             ax.text(4.5e3, T_alg[0] + 1.3, "Algorithm 1, decision of period 1", ha="left", va="bottom", fontsize=7,
                     color=blue)
