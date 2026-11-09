@@ -1,0 +1,15 @@
+\begin{table}[H]
+\centering
+\caption{Difference between the value functions of SDP-1 and SDP-2 over all periods and states. A different optimal action can only arise from a tie between actions of equal value.}
+\label{tab:test1_Q1_equality}
+\begin{tabular}{cccccc}
+\toprule
+test set & instances & max abs diff & max rel diff at (0,0) & instances with identical policy (\%) & states with a tie \\
+\midrule
+A: distributions x demand levels, T = 4 & 180 & 2.8e-14 & 0.0e+00 & 98.3 & 3 \\
+B: horizons T = 4 to 52 & 120 & 2.8e-14 & 0.0e+00 & 98.3 & 2 \\
+D: 36 cost settings, T = 4 & 144 & 2.8e-14 & 0.0e+00 & 99.3 & 2 \\
+all instances & 444 & 2.8e-14 & 0.0e+00 & 98.6 & 7 \\
+\bottomrule
+\end{tabular}
+\end{table}

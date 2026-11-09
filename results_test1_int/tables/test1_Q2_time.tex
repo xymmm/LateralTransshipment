@@ -1,0 +1,20 @@
+\begin{table}[H]
+\centering
+\caption{Running time of SDP-1 and SDP-2, $T=4$, averages over 20 pattern pairs.}
+\label{tab:test1_Q2_time}
+\begin{tabular}{cccccccc}
+\toprule
+distribution & M & instances & $|\mathcal{I}|$ & SDP-1 (s) & SDP-2 (s) & SDP-1 - SDP-2 (s) & SDP-1 / SDP-2 \\
+\midrule
+Normal, cv=0.1 & 4 & 20 & 942 & 0.10 & 0.01 & 0.09 & 10.5 \\
+Normal, cv=0.1 & 7 & 20 & 2091 & 0.56 & 0.03 & 0.53 & 16.5 \\
+Normal, cv=0.1 & 10 & 20 & 4143 & 2.76 & 0.11 & 2.65 & 23.3 \\
+Normal, cv=0.3 & 4 & 20 & 1686 & 0.34 & 0.02 & 0.32 & 14.8 \\
+Normal, cv=0.3 & 7 & 20 & 4899 & 4.41 & 0.15 & 4.26 & 25.8 \\
+Normal, cv=0.3 & 10 & 20 & 9681 & 16.06 & 0.55 & 15.51 & 28.4 \\
+Poisson & 4 & 20 & 2908 & 1.02 & 0.05 & 0.97 & 19.9 \\
+Poisson & 7 & 20 & 5714 & 5.54 & 0.18 & 5.35 & 28.4 \\
+Poisson & 10 & 20 & 9246 & 13.71 & 0.46 & 13.25 & 29.2 \\
+\bottomrule
+\end{tabular}
+\end{table}

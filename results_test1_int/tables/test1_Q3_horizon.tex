@@ -1,0 +1,23 @@
+\begin{table}[H]
+\centering
+\caption{Running time of SDP-1 and SDP-2 as the horizon grows, $M=7$, averages over 10 demand patterns.}
+\label{tab:test1_Q3_horizon}
+\begin{tabular}{cccccccc}
+\toprule
+distribution & T & instances & $|\mathcal{I}|$ & SDP-1 (s) & SDP-2 (s) & SDP-1 - SDP-2 (s) & SDP-1 / SDP-2 \\
+\midrule
+Normal, cv=0.3 & 4 & 10 & 4421 & 3.60 & 0.13 & 3.47 & 24.2 \\
+Normal, cv=0.3 & 8 & 10 & 4647 & 7.79 & 0.28 & 7.51 & 24.8 \\
+Normal, cv=0.3 & 12 & 10 & 4899 & 12.24 & 0.46 & 11.77 & 24.5 \\
+Normal, cv=0.3 & 16 & 10 & 6504 & 33.53 & 1.10 & 32.43 & 27.5 \\
+Normal, cv=0.3 & 20 & 10 & 6417 & 39.18 & 1.35 & 37.83 & 26.5 \\
+Normal, cv=0.3 & 52 & 10 & 8367 & 285.50 & 7.51 & 277.99 & 29.2 \\
+Poisson & 4 & 10 & 5290 & 4.99 & 0.17 & 4.82 & 27.2 \\
+Poisson & 8 & 10 & 5456 & 10.57 & 0.36 & 10.21 & 27.7 \\
+Poisson & 12 & 10 & 5730 & 16.80 & 0.59 & 16.20 & 27.5 \\
+Poisson & 16 & 10 & 6852 & 33.52 & 1.14 & 32.38 & 28.7 \\
+Poisson & 20 & 10 & 6863 & 41.06 & 1.40 & 39.67 & 28.3 \\
+Poisson & 52 & 10 & 8036 & 186.66 & 5.62 & 181.04 & 29.8 \\
+\bottomrule
+\end{tabular}
+\end{table}

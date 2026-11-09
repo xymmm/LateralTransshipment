@@ -1,0 +1,5 @@
+test set,instances,max abs diff,"max rel diff at (0,0)",instances with identical policy (%),states with a tie
+"A: distributions x demand levels, T = 4",180,2.8421709430404014e-14,0.0,98.33333333333333,3
+B: horizons T = 4 to 52,120,2.8421709430404014e-14,0.0,98.33333333333333,2
+"D: 36 cost settings, T = 4",144,2.8421709430404014e-14,0.0,99.30555555555556,2
+all instances,444,2.8421709430404014e-14,0.0,98.64864864864865,7

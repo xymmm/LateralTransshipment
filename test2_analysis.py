@@ -24,6 +24,13 @@ test2_analysis.py : tables and figures from the csv files written by test2_exper
           figure test2_Q3_time         time against |I|, one line per T, SDP-2 and Algorithm 1 side by side
           figure test2_Q3_map          where each method fits a time budget in the (|I|, T) plane, from the fitted laws
           figure test2_Q3_map_simple   the same map for a budget of one hour only, with the four regions labelled
+          table  test2_Q3_table        the table of the paper (longtable, label tab:comp.size): for each T, the CPU time
+                                       of the complete SDP-2 solve, of the T decisions of Algorithm 1 along one demand
+                                       path (block Chorizon, mean over its paths) and of the decision at t = 1
+          table  test2_Q3_budget       in place of the map: by horizon, the largest |I| that SDP-2 solves within one
+                                       hour and the fitted times of Algorithm 1 (test2_Q3_budget_paper.tex is the
+                                       booktabs version, label tab:comp.budget)
+          table  test2_Q3_period       mean decision time of Algorithm 1 in each period at T = 12 and 16 (Chorizon)
 
 |I| denotes the number of states (i1, i2) of SDP-2, i.e. the square of the number of inventory levels per location.
 The comparison in Q2 and Q3 is between the complete SDP-2 solve, which must finish before the first decision can be
@@ -169,7 +176,7 @@ def main():
             d["pair_type"] = np.where(d["pat1"] == d["pat2"], "identical", "different")
         return d
 
-    A, B, Cb, Ap = read("A"), read("B"), read("C"), read("Aplus")
+    A, B, Cb, Ap, H = read("A"), read("B"), read("C"), read("Aplus"), read("Chorizon")
     AA = pd.concat([d for d in (A, Ap) if d is not None], ignore_index=True) if (A is not None or Ap is not None) else None
     for name, d in (("A", A), ("Aplus", Ap), ("B", B)):
         if d is not None:
@@ -319,9 +326,143 @@ def main():
              "beta / delta": cs[2], "R2": r2s, "instances": len(g)},
             {"model": "period 1 decision: log t = a + gamma T + delta log|I|", "a": cd[0], "alpha / gamma": cd[1],
              "beta / delta": cd[2], "R2": r2d, "instances": len(C3)}])
+        # the same quantities on T alone, which is what the budget table below needs
+        ct, r2t = ols(np.log(C3["cpu_decision_k1"].values), [C3["T"].values.astype(float)])
+        fit.loc[len(fit)] = {"model": "period 1 decision: log t = a + gamma T", "a": ct[0], "alpha / gamma": ct[1],
+                             "beta / delta": np.nan, "R2": r2t, "instances": len(C3)}
+        keys = ["dist", "cv", "scale", "T", "pat1"]
+        C3h = C3.copy()
+        ch = None
+        if H is not None and "cpu_horizon_mean" in H and H["cpu_horizon_mean"].notna().any():
+            Hm = H[H["cpu_horizon_mean"].notna()]
+            C3h = C3h.merge(Hm[keys + ["cpu_horizon_mean", "cpu_horizon_max", "cpu_period_mean", "paths", "decisions",
+                                        "cpu_decision_k1"]].rename(columns={"cpu_decision_k1": "cpu_k1_h"}),
+                            on=keys, how="left")
+            # the t = 1 column of the paper's table comes from the same run as the horizon column, so that the
+            # horizon time, which contains the decision at t = 1, is never below it
+            C3h["cpu_k1_tab"] = C3h["cpu_k1_h"].fillna(C3h["cpu_decision_k1"])
+            g = C3h[C3h["cpu_horizon_mean"].notna()]
+            ch, r2h = ols(np.log(g["cpu_horizon_mean"].values), [g["T"].values.astype(float)])
+            fit.loc[len(fit)] = {"model": "horizon (T decisions on one path): log t = a + gamma T", "a": ch[0],
+                                 "alpha / gamma": ch[1], "beta / delta": np.nan, "R2": r2h, "instances": len(g)}
+            print(f"note: block Chorizon covers {len(g)} of the {len(C3)} instances of block C")
+        else:
+            C3h["cpu_horizon_mean"] = np.nan
+            C3h["cpu_k1_tab"] = C3h["cpu_decision_k1"]
+            print("note: results_test2/Chorizon.csv not found or empty; the horizon column of test2_Q3_table is empty")
         for c in ("a", "alpha / gamma", "beta / delta", "R2"):
             FMT[c] = "{:.3f}"
         save(fit, "test2_Q3_fit", "Fitted computing-time laws (CPU time, block C).", tab)
+
+        # table of the paper: SDP-2 complete solve | Algorithm 1 over the horizon | Algorithm 1 decision at t = 1,
+        # three columns for each T, rows by distribution and scale, averaged over the two patterns
+        def sec(x):
+            if pd.isna(x):
+                return "--"
+            if x >= 1000:
+                return f"{x:,.0f}"
+            if x >= 100:
+                return f"{x:.0f}"
+            if x >= 10:
+                return f"{x:.1f}"
+            if x >= 1:
+                return f"{x:.2f}"
+            if x >= 0.1:
+                return f"{x:.2f}"
+            return f"{x:.3f}"
+
+        def longtable(caption, label, spec, header, body, ncols):
+            head = ["\\toprule", header, "\\midrule"]
+            lines = ["{\\footnotesize", "\\renewcommand{\\arraystretch}{0.9}", "\\setlength{\\tabcolsep}{3pt}",
+                     f"\\begin{{longtable}}{{{spec}}}", f"\\caption{{{caption}}}", f"\\label{{{label}}} \\\\"]
+            lines += head + ["\\endfirsthead", f"\\multicolumn{{{ncols}}}{{l}}{{\\textit{{Table~\\ref{{{label}}} continued}}}} \\\\"]
+            lines += head + ["\\endhead", "\\midrule", f"\\multicolumn{{{ncols}}}{{r}}{{\\textit{{continued on next page}}}} \\\\",
+                             "\\endfoot", "\\bottomrule", "\\endlastfoot"]
+            lines += body + ["\\end{longtable}", "}"]
+            return "\n".join(lines) + "\n"
+
+        Ts = sorted(C3["T"].unique())
+        header = (" & & " + " & ".join(f"\\multicolumn{{3}}{{c}}{{$T={T}$}}" for T in Ts) + " \\\\\n"
+                  + "".join(f"\\cmidrule(lr){{{3 + 3 * j}-{5 + 3 * j}}}" for j in range(len(Ts))) + "\n"
+                  + "$s$ & " + I_COL + " & " + " & ".join("SDP-2 & Horizon & $t=1$" for _ in Ts) + " \\\\")
+        body, recs = [], []
+        for dl in ("Poisson", "Normal, cv=0.3"):
+            d = C3h[C3h["distribution"] == dl]
+            if not len(d):
+                continue
+            lab = "Poisson" if dl == "Poisson" else "Normal, $\\rho=" + dl.split("=")[1] + "$"
+            body.append(f"\\multicolumn{{{2 + 3 * len(Ts)}}}{{l}}{{\\textit{{{lab}}}}} \\\\")
+            for sc in sorted(d["scale"].unique()):
+                x = d[d["scale"] == sc]
+                I = x[x["T"] == min(Ts)]["I"].mean()
+                cells, rec = [], {"distribution": dl, "scale": sc, I_COL: I}
+                for T in Ts:
+                    y = x[x["T"] == T]
+                    vals = (y["cpu_sdp2"].mean(), y["cpu_horizon_mean"].mean(), y["cpu_k1_tab"].mean())
+                    cells += [sec(v) for v in vals]
+                    rec.update({f"SDP-2 T={T}": vals[0], f"horizon T={T}": vals[1], f"t=1 T={T}": vals[2]})
+                body.append(f"\\quad {sc:g} & {I:,.0f} & " + " & ".join(cells) + " \\\\")
+                recs.append(rec)
+        cap = ("CPU time in seconds of the complete solve of SDP-2, of the $T$ decisions of Algorithm~\\ref{alg:heuristic} "
+               "along one demand path and of its decision at $t=1$, by the size of the state space and the horizon. "
+               "$|\\mathcal{I}|$ is the number of states at $T=4$, 8 and 16; at $T=12$ the pattern SIN1 has slightly fewer states.")
+        with open(os.path.join(tab, "test2_Q3_table.tex"), "w") as f:
+            f.write(longtable(cap, "tab:comp.size", "l" + "r" * (1 + 3 * len(Ts)), header, body, 2 + 3 * len(Ts)))
+        pd.DataFrame(recs).to_csv(os.path.join(tab, "test2_Q3_table.csv"), index=False)
+        print(f"\n== test2_Q3_table: {cap}")
+        print("\n".join(body))
+
+        # where each method is faster: smallest |I| at which Algorithm 1 beats SDP-2, by T
+        print("\n== crossover: instances where the horizon time / the decision at t=1 of Algorithm 1 is below SDP-2")
+        for T in Ts:
+            y = C3h[C3h["T"] == T].sort_values("I")
+            fh = y[y["cpu_horizon_mean"] < y["cpu_sdp2"]]["I"] if y["cpu_horizon_mean"].notna().any() else pd.Series(dtype=float)
+            fk = y[y["cpu_decision_k1"] < y["cpu_sdp2"]]["I"]
+            print(f"  T={T}: horizon faster in {len(fh)}/{len(y)} instances"
+                  + (f", smallest |I| {fh.min():,.0f}" if len(fh) else "")
+                  + f"; t=1 faster in {len(fk)}/{len(y)}" + (f", smallest |I| {fk.min():,.0f}" if len(fk) else ""))
+
+        # budget table, in place of the map: for a budget of one hour, the largest state space SDP-2 solves and the
+        # fitted times of Algorithm 1, by horizon; cells beyond one day are left out, the fit is estimated up to T = 16
+        B_SEC, DAY = 3600.0, 86400.0
+        rows = []
+        for T in (4, 8, 12, 16, 20, 24, 28, 52):
+            I_max = np.exp((np.log(B_SEC) - cs[0] - cs[1] * np.log(T)) / cs[2])
+            tk = np.exp(ct[0] + ct[1] * T)
+            th = np.exp(ch[0] + ch[1] * T) if ch is not None else np.nan
+            rows.append({"T": T, "SDP-2: largest |I| within one hour": I_max, "inventory levels per location": np.sqrt(I_max),
+                         "Algorithm 1: decision at t=1 (s)": tk if tk <= DAY else np.nan,
+                         "Algorithm 1: horizon (s)": th if th <= DAY else np.nan})
+        bud = pd.DataFrame(rows)
+        FMT.update({"SDP-2: largest |I| within one hour": "{:,.0f}", "inventory levels per location": "{:.0f}",
+                    "Algorithm 1: decision at t=1 (s)": "{:,.1f}", "Algorithm 1: horizon (s)": "{:,.1f}"})
+        save(bud, "test2_Q3_budget", "Problem sizes within a budget of one hour, from the fitted relations.", tab)
+        body = [f"{int(r['T'])} & {r['SDP-2: largest |I| within one hour']:,.0f} & {r['inventory levels per location']:.0f} & "
+                f"{sec(r['Algorithm 1: decision at t=1 (s)'])} & {sec(r['Algorithm 1: horizon (s)'])} \\\\" for _, r in bud.iterrows()]
+        with open(os.path.join(tab, "test2_Q3_budget_paper.tex"), "w") as f:
+            f.write("\\begin{table}[H]\n\\centering\n\\footnotesize\n"
+                    "\\caption{Problem sizes within a budget of one hour, from the fitted relations. The fit of "
+                    "Algorithm~\\ref{alg:heuristic} is estimated on horizons up to $T=16$, and its times beyond one day are left out.}\n"
+                    "\\label{tab:comp.budget}\n\\renewcommand{\\arraystretch}{0.9}\n\\begin{tabular}{rrrrr}\n\\toprule\n"
+                    " & \\multicolumn{2}{c}{SDP-2 within one hour} & \\multicolumn{2}{c}{Algorithm~\\ref{alg:heuristic}, fitted time (s)} \\\\\n"
+                    "\\cmidrule(lr){2-3}\\cmidrule(lr){4-5}\n"
+                    "$T$ & largest $|\\mathcal{I}|$ & levels per location & $t=1$ & horizon \\\\\n\\midrule\n"
+                    + "\n".join(body) + "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
+
+        # decision time by period: mean CPU time of the decisions of each period, at T = 16 and T = 12 (block Chorizon)
+        if "cpu_period_mean" in C3h and C3h["cpu_period_mean"].notna().any():
+            rows = []
+            for T in (12, 16):
+                y = C3h[(C3h["T"] == T) & C3h["cpu_period_mean"].notna()]
+                if not len(y):
+                    continue
+                M = np.array([[float(v) for v in s.split()] for s in y["cpu_period_mean"]])
+                rows.append({"T": T, **{f"t={k + 1}": M[:, k].mean() for k in range(T)}})
+            per = pd.DataFrame(rows)
+            for c in per.columns:
+                if c != "T":
+                    FMT[c] = "{:.3f}"
+            save(per, "test2_Q3_period", "Mean CPU time (s) of the decision of Algorithm 1 in each period, block Chorizon.", tab)
 
         if plt is not None:
             Ts = sorted(C3["T"].unique())
@@ -386,7 +527,7 @@ def main():
             ax.text(2.2e4, 22.5, "both within one hour", ha="center", va="center", fontsize=7.5)
             ax.text(9.0e5, 12, "Algorithm 1 only", ha="center", va="center", fontsize=7.5, color=blue)
             ax.text(1.2e4, 48, "SDP-2 only", ha="center", va="center", fontsize=7.5, color=red)
-            ax.text(9.0e5, 48, "neither", ha="center", va="center", fontsize=7.5, color="0.35")
+            ax.text(9.0e5, 48, "out of time budget", ha="center", va="center", fontsize=7.5, color="0.35")
             ax.text(1.55e5, 57, "SDP-2, complete solve", ha="left", va="top", fontsize=7, color=red)
             ax.text(4.5e3, T_alg[0] + 1.3, "Algorithm 1, decision of period 1", ha="left", va="bottom", fontsize=7,
                     color=blue)

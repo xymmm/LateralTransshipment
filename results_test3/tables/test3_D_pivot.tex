@@ -1,0 +1,38 @@
+\begin{table}[H]
+\centering
+\caption{Test set D: average gaps pivoting each factor.}
+\label{tab:test3_D_pivot}
+\begin{tabular}{ccccccc}
+\toprule
+parameter & level & instances & Alg mean (\%) & QM mean (\%) & NT mean (\%) & Alg better (\%) \\
+\midrule
+horizon T & 4 & 216 & 0.398 & 1.645 & 2.142 & 46.3 \\
+horizon T & 8 & 216 & 0.575 & 1.950 & 2.778 & 59.3 \\
+distribution & Poisson & 144 & 0.733 & 1.503 & 2.466 & 41.7 \\
+distribution & Normal, cv=0.1 & 144 & 0.119 & 2.134 & 2.315 & 63.9 \\
+distribution & Normal, cv=0.3 & 144 & 0.608 & 1.755 & 2.600 & 52.8 \\
+demand relation & identical STAT/STAT & 72 & 0.628 & 0.438 & 0.728 & 29.2 \\
+demand relation & identical LCY1/LCY1 & 72 & 0.199 & 1.055 & 1.264 & 44.4 \\
+demand relation & opposite LCY1/LCY2 & 72 & 0.378 & 1.808 & 2.739 & 62.5 \\
+demand relation & opposite SIN1/SIN1rev & 72 & 0.598 & 0.932 & 1.578 & 61.1 \\
+demand relation & opposite LCY2/LCY2rev & 72 & 0.556 & 1.499 & 2.425 & 51.4 \\
+demand relation & unequal STAT/STATlow & 72 & 0.560 & 5.051 & 6.027 & 68.1 \\
+fixed ordering cost K & 20 & 144 & 0.716 & 0.523 & 0.975 & 29.2 \\
+fixed ordering cost K & 30 & 144 & 0.440 & 1.379 & 2.113 & 50.0 \\
+fixed ordering cost K & 50 & 144 & 0.304 & 3.490 & 4.292 & 79.2 \\
+fixed transshipment cost R & 2 & 108 & 0.517 & 3.380 & 4.869 & 85.2 \\
+fixed transshipment cost R & 5 & 108 & 0.522 & 2.220 & 3.036 & 65.7 \\
+fixed transshipment cost R & 10 & 108 & 0.483 & 1.206 & 1.510 & 39.8 \\
+fixed transshipment cost R & 20 & 108 & 0.423 & 0.384 & 0.425 & 20.4 \\
+ratio K/R & K/R <= 2 & 108 & 0.578 & 0.037 & 0.078 & 7.4 \\
+ratio K/R & 2 < K/R <= 4 & 108 & 0.450 & 0.730 & 1.042 & 37.0 \\
+ratio K/R & K/R >= 5 & 216 & 0.459 & 3.211 & 4.360 & 83.3 \\
+value of transshipment (NT gap, %) & <= 0.05 & 100 & 0.345 & 0.033 & 0.011 & 12.0 \\
+value of transshipment (NT gap, %) & 0.05-0.5 & 77 & 0.495 & 0.072 & 0.227 & 23.4 \\
+value of transshipment (NT gap, %) & 0.5-1 & 35 & 0.547 & 0.355 & 0.762 & 45.7 \\
+value of transshipment (NT gap, %) & 1-2 & 57 & 0.659 & 0.716 & 1.447 & 50.9 \\
+value of transshipment (NT gap, %) & 2-5 & 94 & 0.587 & 2.127 & 3.205 & 89.4 \\
+value of transshipment (NT gap, %) & > 5 & 69 & 0.371 & 7.457 & 9.187 & 100.0 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,23 @@
+\begin{table}[H]
+\centering
+\caption{Computing time of SDP-2 and of one decision of Algorithm 1.}
+\label{tab:test2_Q2_time}
+\begin{tabular}{ccccccccc}
+\toprule
+T & distribution & instances & $|\mathcal{I}|$ & SDP-2 (s) & Algorithm 1, one decision (s) & Algorithm 1, decision at k=1 (s) & decisions per instance & Algorithm 1, simulation (s) \\
+\midrule
+4 & Poisson & 180 & 6647 & 0.48 & 0.004 & 0.021 & 1485 & 5.3 \\
+4 & Normal, cv=0.1 & 180 & 2460 & 0.06 & 0.003 & 0.024 & 166 & 0.4 \\
+4 & Normal, cv=0.2 & 180 & 3546 & 0.14 & 0.003 & 0.026 & 571 & 1.6 \\
+4 & Normal, cv=0.3 & 180 & 5221 & 0.31 & 0.003 & 0.026 & 1137 & 4.0 \\
+8 & Poisson & 180 & 6895 & 0.88 & 0.036 & 0.337 & 4036 & 141.0 \\
+8 & Normal, cv=0.1 & 180 & 2629 & 0.14 & 0.052 & 0.662 & 331 & 16.7 \\
+8 & Normal, cv=0.2 & 180 & 3788 & 0.30 & 0.045 & 0.490 & 1321 & 58.0 \\
+8 & Normal, cv=0.3 & 180 & 5424 & 0.56 & 0.036 & 0.410 & 2824 & 98.7 \\
+12 & Poisson & 45 & 8323 & 1.89 & 0.205 & 2.773 & 6690 & 1372.3 \\
+12 & Normal, cv=0.1 & 45 & 2725 & 0.21 & 0.524 & 6.030 & 519 & 281.5 \\
+12 & Normal, cv=0.2 & 45 & 3745 & 0.43 & 0.272 & 3.000 & 2182 & 610.0 \\
+12 & Normal, cv=0.3 & 45 & 4864 & 0.64 & 0.375 & 5.458 & 4768 & 1820.3 \\
+\bottomrule
+\end{tabular}
+\end{table}

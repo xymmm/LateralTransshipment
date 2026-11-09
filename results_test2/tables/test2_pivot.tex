@@ -1,0 +1,40 @@
+\begin{table}[H]
+\centering
+\caption{Average percentage optimality gap of Algorithm 1 under pivoting parameters.}
+\label{tab:test2_pivot}
+\begin{tabular}{ccccccc}
+\toprule
+parameter & level & instances & T=4 & T=8 & T=12 & all \\
+\midrule
+horizon T & 4 & 720 & 0.405 & nan & nan & 0.4053702225931776 \\
+horizon T & 8 & 720 & nan & 0.417 & nan & 0.41681670271886084 \\
+horizon T & 12 & 180 & nan & nan & 0.386 & 0.3862215532748384 \\
+distribution & Poisson & 405 & 0.681 & 0.789 & 0.592 & 0.7190293919742966 \\
+distribution & Normal, cv=0.1 & 405 & 0.150 & 0.122 & 0.069 & 0.12859756071711523 \\
+distribution & Normal, cv=0.2 & 405 & 0.193 & 0.232 & 0.234 & 0.21457850638687131 \\
+distribution & Normal, cv=0.3 & 405 & 0.598 & 0.524 & 0.650 & 0.5711142095986022 \\
+demand pattern of location 1 & LCY1 & 216 & 0.169 & 0.296 & 0.363 & 0.27607446961804727 \\
+demand pattern of location 1 & LCY2 & 144 & 0.628 & 0.708 & nan & 0.6680345354709528 \\
+demand pattern of location 1 & SIN1 & 180 & 0.733 & 0.629 & 0.436 & 0.632260766577033 \\
+demand pattern of location 1 & SIN2 & 144 & 0.375 & 0.325 & nan & 0.3498355737427598 \\
+demand pattern of location 1 & STAT & 180 & 0.337 & 0.350 & 0.341 & 0.3430895850736971 \\
+demand pattern of location 1 & RAND & 144 & 0.333 & 0.507 & nan & 0.41985755248326984 \\
+demand pattern of location 1 & EMP1 & 180 & 0.339 & 0.576 & 0.428 & 0.45114238729717376 \\
+demand pattern of location 1 & EMP2 & 144 & 0.425 & 0.316 & nan & 0.370149052013809 \\
+demand pattern of location 1 & EMP3 & 144 & 0.313 & 0.214 & nan & 0.2635056157683579 \\
+demand pattern of location 1 & EMP4 & 144 & 0.403 & 0.247 & nan & 0.32510161056264014 \\
+patterns of the two locations & identical & 828 & 0.395 & 0.401 & 0.341 & 0.39062844711015526 \\
+patterns of the two locations & different & 792 & 0.416 & 0.432 & 0.454 & 0.4268359995036996 \\
+fixed ordering cost K & 10 & 540 & 0.622 & 0.561 & 0.444 & 0.5752369271511367 \\
+fixed ordering cost K & 20 & 540 & 0.471 & 0.404 & 0.333 & 0.4260090136876276 \\
+fixed ordering cost K & 30 & 540 & 0.123 & 0.285 & 0.382 & 0.2237438106688996 \\
+fixed transshipment cost R & 5 & 540 & 0.422 & 0.430 & 0.409 & 0.42448539849650363 \\
+fixed transshipment cost R & 10 & 540 & 0.393 & 0.411 & 0.373 & 0.39851054606891423 \\
+fixed transshipment cost R & 20 & 540 & 0.401 & 0.409 & 0.377 & 0.40199380694224607 \\
+backorder cost b & 3 & 810 & 0.287 & 0.357 & 0.326 & 0.3223127089252248 \\
+backorder cost b & 5 & 810 & 0.524 & 0.476 & 0.447 & 0.4943471254132179 \\
+unit costs (z, v) & (1, 0.5) & 810 & 0.445 & 0.491 & 0.360 & 0.45602640123043536 \\
+unit costs (z, v) & (2, 1) & 810 & 0.365 & 0.343 & 0.413 & 0.3606334331080074 \\
+\bottomrule
+\end{tabular}
+\end{table}

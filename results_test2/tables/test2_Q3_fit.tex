@@ -1,0 +1,15 @@
+\begin{table}[H]
+\centering
+\caption{Fitted computing-time laws (CPU time, block C).}
+\label{tab:test2_Q3_fit}
+\begin{tabular}{cccccc}
+\toprule
+model & a & alpha / gamma & beta / delta & R2 & instances \\
+\midrule
+SDP-2: log t = a + alpha log T + beta log|I| & -20.920 & 0.983 & 2.113 & 0.994 & 80 \\
+period 1 decision: log t = a + gamma T + delta log|I| & -3.047 & 0.484 & -0.219 & 0.932 & 80 \\
+period 1 decision: log t = a + gamma T & -5.399 & 0.484 & nan & 0.920 & 80 \\
+horizon (T decisions on one path): log t = a + gamma T & -5.295 & 0.559 & nan & 0.951 & 80 \\
+\bottomrule
+\end{tabular}
+\end{table}

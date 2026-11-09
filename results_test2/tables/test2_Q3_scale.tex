@@ -1,0 +1,27 @@
+\begin{table}[H]
+\centering
+\caption{Computing time as the demand level grows, $T=8$; the demand means are multiplied by the scale.}
+\label{tab:test2_Q3_scale}
+\begin{tabular}{cccccccccc}
+\toprule
+test set & distribution & scale & instances & N & SDP-2 (s) & Algorithm 1, one decision (s) & Algorithm 1, decision at k=1 (s) & decisions per instance & Algorithm 1, simulation (s) \\
+\midrule
+A & Poisson & 1 & 180 & 82 & 0.88 & 0.036 & 0.337 & 4036 & 141.0 \\
+A & Normal, cv=0.3 & 1 & 180 & 73 & 0.56 & 0.036 & 0.410 & 2824 & 98.7 \\
+B & Normal, cv=0.3 & 2 & 5 & 141 & 8.87 & 0.070 & 0.536 & 7208 & 518.8 \\
+B & Normal, cv=0.3 & 3 & 5 & 211 & 42.96 & 0.072 & 0.502 & 11819 & 867.8 \\
+B & Normal, cv=0.3 & 4 & 5 & 280 & 131.41 & 0.076 & 0.478 & 16124 & 1233.1 \\
+B & Normal, cv=0.3 & 5 & 5 & 350 & 354.66 & 0.070 & 0.321 & 22360 & 1562.8 \\
+B & Poisson & 2 & 5 & 125 & 4.40 & 0.081 & 0.637 & 5317 & 439.7 \\
+B & Poisson & 3 & 5 & 169 & 16.80 & 0.092 & 0.642 & 5742 & 533.8 \\
+B & Poisson & 4 & 5 & 213 & 43.26 & 0.091 & 0.585 & 5818 & 525.4 \\
+B & Poisson & 5 & 5 & 255 & 87.56 & 0.084 & 0.422 & 6614 & 555.5 \\
+C & Normal, cv=0.3 & 6 & 2 & 496 & 1266.80 & 0.045 & 0.217 & 71 & nan \\
+C & Normal, cv=0.3 & 8 & 2 & 661 & 4339.04 & 0.045 & 0.146 & 71 & nan \\
+C & Poisson & 6 & 2 & 340 & 240.26 & 0.060 & 0.316 & 71 & nan \\
+C & Poisson & 8 & 2 & 433 & 787.04 & 0.060 & 0.189 & 70 & nan \\
+C & Poisson & 10 & 2 & 523 & 1664.90 & 0.041 & 0.226 & 70 & nan \\
+C & Poisson & 12 & 2 & 616 & 3274.01 & 0.051 & 0.256 & 70 & nan \\
+\bottomrule
+\end{tabular}
+\end{table}

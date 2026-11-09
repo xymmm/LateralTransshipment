@@ -1,0 +1,23 @@
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{Problem sizes within a budget of one hour, from the fitted relations. The fit of Algorithm~\ref{alg:heuristic} is estimated on horizons up to $T=16$, and its times beyond one day are left out.}
+\label{tab:comp.budget}
+\renewcommand{\arraystretch}{0.9}
+\begin{tabular}{rrrrr}
+\toprule
+ & \multicolumn{2}{c}{SDP-2 within one hour} & \multicolumn{2}{c}{Algorithm~\ref{alg:heuristic}, fitted time (s)} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+$T$ & largest $|\mathcal{I}|$ & levels per location & $t=1$ & horizon \\
+\midrule
+4 & 503,830 & 710 & 0.031 & 0.047 \\
+8 & 364,920 & 604 & 0.22 & 0.44 \\
+12 & 302,170 & 550 & 1.51 & 4.11 \\
+16 & 264,308 & 514 & 10.5 & 38.4 \\
+20 & 238,239 & 488 & 72.8 & 359 \\
+24 & 218,860 & 468 & 506 & 3,363 \\
+28 & 203,710 & 451 & 3,510 & 31,465 \\
+52 & 152,722 & 391 & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
