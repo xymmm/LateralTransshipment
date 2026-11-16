@@ -1,0 +1,106 @@
+[
+ {
+  "instance": "corners_020",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_017",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_016",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_021",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_025",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_024",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_028",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_029",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_048",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_049",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_052",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_053",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_056",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_057",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_060",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_061",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_081",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_080",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_084",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_085",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_088",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_089",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "random_013",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_092",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "corners_093",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ },
+ {
+  "instance": "random_056",
+  "error": "ValueError('zero-size array to reduction operation maximum which has no identity')"
+ }
+]

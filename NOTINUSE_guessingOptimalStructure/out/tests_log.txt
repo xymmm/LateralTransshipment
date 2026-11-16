@@ -1,0 +1,7 @@
+done STAT-STAT_T4_K20_R20
+done STAT-STAT_T4_K50_R2
+done LCY1-LCY2_T4_K20_R20
+done LCY1-LCY2_T4_K50_R2
+done STAT-STAT3_T4_K20_R20
+done STAT-STAT3_T4_K50_R2
+written /Users/xiyuanma/PycharmProjects/LateralTransshipment/structure/out/tests_summary.md

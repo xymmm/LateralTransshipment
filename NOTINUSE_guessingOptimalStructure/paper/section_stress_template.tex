@@ -1,0 +1,46 @@
+\subsection{Stress test on extreme instances}\label{sec:stress}
+
+The instances above have moderate parameters. A further test uses extreme ones. Its purpose is twofold: to look for an instance that contradicts a proved statement, and to look for regularities of the optimal policy that the theorem does not contain. All instances have $z=1$.
+\begin{itemize}
+\item \emph{Corners.} Every combination of $K\in\{0.5,300\}$, $R\in\{0.1,300\}$, $v\in\{0.01,1\}$, $b\in\{1.05,100\}$ and $h\in\{0.05,10\}$, with Poisson demand, $T=3$ and three pairs of demand patterns: $(6,6,6)$ at both locations, $(1,1,1)$ against $(14,14,14)$, and $(1,1,18)$ against $(1,18,1)$; 96 instances.
+\item \emph{Random.} The costs are drawn independently with a uniform distribution of their logarithm, $K\in[0.5,300]$, $R\in[0.1,300]$, $v\in[0.01,1]$, $b\in[1.05,100]$ and $h\in[0.05,10]$. The horizon is drawn from 2 to 5 periods. The demand is Poisson or normal with $\rho\in\{0.02,0.1,0.3,0.5\}$. The pair of demand patterns is drawn from ten pairs. They include equal, very unequal, increasing against decreasing, alternating and peaked demands and a location with almost no demand. The expected demands are scaled down where needed so that an instance can be solved in a few minutes; 600 instances, of which %NRANDOM% could be solved. For one instance the search for an adequate range of inventory levels did not end within its limit. For six instances a reorder-up-to level of a state of the window lay above the adequate range, and they were solved again on a wider range.
+\end{itemize}
+The %NSTRESS% solved instances have %NIP% instance-periods and %NSTATESB% states of the window, and %NKLE% of them have $K\le R+v$. A fixed cost of $0.5$ against a unit cost of 1 makes the fixed costs almost irrelevant, and a fixed cost of 300 exceeds the unit cost of the whole demand of the horizon. A backorder cost of $1.05$ is just above the unit cost, so backordering is almost free.
+
+\emph{Proved statements.} No state contradicts Theorem~\ref{thm:structure}. The counts that correspond to Table~\ref{tab:checks} are all zero. A transshipment is strictly optimal in %NTRANS% opening states, and %NBEYOND% of them lie beyond the transshipment level of their line and reach it in value. A reorder is made in %NREORDER% post-transshipment states, and %NBELOW% of them lie below the level of their pattern and reach it in value. In the moderate instances every reorder was of this kind. In the extreme instances %NNOTBELOW% reorders start at or above the level and go to a constrained minimiser, as Lemma~\ref{lem:patterns} allows. The sender reorders after a transshipment in %NSENDER% states, always with $K\ge R+v|W|$, and never in the %NKLT% instances with $K<R+v$. In the last period the thresholds and the levels agree with Lemma~\ref{lem:last} in all %NLAST% cases.
+
+\emph{Threshold property.} We test the property on two sets of states. The first is the set of all post-transshipment states of the window. The second is the set of \emph{reached} states. A post-transshipment state is reached if the computed optimal policy moves to it from some opening state of the window, and an opening state without transshipment is reached from itself.
+%THRESHOLDTEXT%
+
+\begin{remark}[A failure at states that are not reached]\label{obs:unreached}
+The following instance has $K\le R+v$ and can be checked exactly. Let $T=2$, let the demand be 2 at each location in each period with probability one, and let $K=1$, $R=10$, $z=1$, $v=1$, $h=3$ and $b=2$. The exact computation of Proposition~\ref{prop:threshold} gives the following for period~1 and the post-transshipment states $\langle x^1,20\rangle$. The best decision without a reorder at location~1 costs 108 for $-12\le x^1\le1$. The best decision with a reorder at location~1 costs 110 for $-12\le x^1\le-2$, 109 for $x^1=-1$ and 107 for $x^1=1$. Location~1 therefore reorders in every optimal decision at $x^1=1$ and in no optimal decision at $-12\le x^1\le-1$. The reason is that location~2 holds a large surplus. A location with a large backlog waits for a transshipment of this surplus in period~2, and a location with a small need reorders at once because the fixed transshipment cost is too high for a small quantity. These states are not reached. At every opening state $\langle x^1,20\rangle$ with $-12\le x^1\le1$ the only optimal first-stage decision is a transshipment from location~2. It ships the surplus in period~1. No opening state on the same line within 40 units has an optimal transshipment that ends in one of these states. In this instance a transshipment that pays in period~2 pays even more in period~1. The first stage therefore removes the states at which the second stage would wait.
+\end{remark}
+
+\subsection{Further regularities}\label{sec:regular}
+
+The results for unit costs contain monotonicity properties, and the test looks for their counterparts. Table~\ref{tab:regular} counts the exceptions over the %NSTRESS% extreme instances. No property of the table holds in all instances.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Properties that are not part of Theorem~\ref{thm:structure}, and the number of the %NSTRESS% extreme instances in which each fails in at least one period.}\label{tab:regular}
+\begin{tabular}{p{11.2cm}r}
+\toprule
+Property & Instances with a failure \\
+\midrule
+The reorder-up-to curve $S^j_t(x)$ does not increase in the inventory $x$ of the other location & %E1% \\
+The curve $S^j_t(x)$ falls by at most one unit per unit of $x$ & %E2% \\
+The transshipment levels $D^+_t(n)$ and $D^-_t(n)$ do not decrease in the total inventory $n$ & %E3% \\
+The levels rise by at most one unit per unit of $n$ & %E4% \\
+A sender that reorders after the transshipment ships all its stock & %E5% \\
+$\Cq_t$ is supermodular & %E6% \\
+$\Cq_t$ is submodular & %E7% \\
+The states without transshipment form an interval of every line & %EINT% \\
+$\Ct_t$ is $K$-convex in each coordinate & %EKC% \\
+$\Cq_t$ is $K$-convex in each coordinate & %EKCQ% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Ties are never counted as failures. A curve or a level enters the count only where the optimal policy uses it and where its minimiser does not lie at an end of the window. The ten types of action that Corollary~\ref{cor:types} allows, with the direction of the transshipment counted separately, all occur: %NTEN% instance-periods contain all ten, and each type occurs in at least %NMINTYPE% instances. The stress test therefore supports the view that Theorem~\ref{thm:NOTINUSE_guessingOptimalStructure} states what holds in general. The properties that the models with unit costs add to it are lost with the fixed costs.
+

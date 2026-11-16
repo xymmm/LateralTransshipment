@@ -1,0 +1,6 @@
+[
+ {
+  "instance": "random2_398",
+  "error": "RuntimeError('no adequate grid found; increase max_iter')"
+ }
+]

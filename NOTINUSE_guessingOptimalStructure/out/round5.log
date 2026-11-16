@@ -1,0 +1,278 @@
+690 instances to run, 6 done
+1/690 corners_006 0.9s
+2/690 corners_010 0.9s
+3/690 corners_011 0.9s
+4/690 corners_007 1.0s
+5/690 corners_014 1.0s
+6/690 corners_015 0.9s
+7/690 corners_012 1.9s
+8/690 corners_008 1.9s
+9/690 corners_019 2.4s
+10/690 corners_013 4.4s
+11/690 corners_009 4.4s
+12/690 corners_023 2.5s
+13/690 corners_018 5.0s
+14/690 corners_027 1.0s
+15/690 corners_026 1.0s
+16/690 corners_022 5.1s
+17/690 corners_030 1.0s
+18/690 corners_031 1.0s
+ERROR {'instance': 'corners_020', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+ERROR {'instance': 'corners_017', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+ERROR {'instance': 'corners_016', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+ERROR {'instance': 'corners_021', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+ERROR {'instance': 'corners_025', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+ERROR {'instance': 'corners_024', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+ERROR {'instance': 'corners_028', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+ERROR {'instance': 'corners_029', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+27/690 corners_032 25.1s
+28/690 corners_034 14.4s
+29/690 corners_035 14.4s
+30/690 corners_038 14.1s
+31/690 corners_039 14.5s
+32/690 corners_036 26.1s
+33/690 corners_042 14.6s
+34/690 corners_043 14.8s
+35/690 corners_040 26.3s
+36/690 corners_046 14.6s
+37/690 corners_044 27.6s
+38/690 corners_047 15.7s
+39/690 corners_033 53.8s
+40/690 corners_037 53.9s
+41/690 corners_051 16.3s
+42/690 corners_041 54.9s
+43/690 corners_050 29.4s
+44/690 corners_055 15.4s
+45/690 corners_045 56.1s
+46/690 corners_054 29.6s
+47/690 corners_058 16.0s
+48/690 corners_059 16.6s
+49/690 corners_062 16.2s
+50/690 corners_063 14.6s
+51/690 corners_064 30.1s
+52/690 corners_065 54.5s
+53/690 corners_066 29.9s
+ERROR {'instance': 'corners_048', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+55/690 corners_067 29.9s
+ERROR {'instance': 'corners_049', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+ERROR {'instance': 'corners_052', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+ERROR {'instance': 'corners_053', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+ERROR {'instance': 'corners_056', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+60/690 corners_068 29.6s
+61/690 corners_070 29.3s
+ERROR {'instance': 'corners_057', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+63/690 corners_071 29.8s
+ERROR {'instance': 'corners_060', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+65/690 corners_072 30.0s
+ERROR {'instance': 'corners_061', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+67/690 corners_069 54.0s
+68/690 corners_074 29.7s
+69/690 corners_075 29.2s
+70/690 corners_076 29.2s
+71/690 corners_078 29.5s
+72/690 corners_079 29.9s
+73/690 corners_073 54.1s
+74/690 corners_082 29.6s
+75/690 corners_083 29.4s
+76/690 corners_077 54.3s
+ERROR {'instance': 'corners_081', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+ERROR {'instance': 'corners_080', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+79/690 corners_086 29.6s
+80/690 corners_087 29.1s
+ERROR {'instance': 'corners_084', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+82/690 corners_090 29.8s
+ERROR {'instance': 'corners_085', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+84/690 random_001 0.0s
+85/690 random_002 0.5s
+86/690 corners_091 29.8s
+87/690 corners_094 29.3s
+ERROR {'instance': 'corners_088', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+ERROR {'instance': 'corners_089', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+90/690 corners_095 29.4s
+91/690 random_008 1.0s
+92/690 random_003 16.0s
+93/690 random_009 0.4s
+94/690 random_011 1.0s
+95/690 random_012 0.1s
+ERROR {'instance': 'random_013', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+ERROR {'instance': 'corners_092', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+98/690 random_004 24.8s
+ERROR {'instance': 'corners_093', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+100/690 random_007 20.8s
+101/690 random_018 2.0s
+102/690 random_010 22.9s
+103/690 random_006 42.7s
+104/690 random_016 23.3s
+105/690 random_022 0.6s
+106/690 random_005 46.7s
+107/690 random_023 2.3s
+108/690 random_014 41.7s
+109/690 random_025 13.3s
+110/690 random_024 19.5s
+111/690 random_019 47.5s
+112/690 random_029 13.9s
+113/690 random_021 48.3s
+114/690 random_026 49.5s
+115/690 random_030 17.6s
+116/690 random_028 48.9s
+117/690 random_034 1.8s
+118/690 random_035 0.0s
+119/690 random_032 21.3s
+120/690 random_037 0.0s
+121/690 random_038 0.1s
+122/690 random_036 6.4s
+123/690 random_039 16.8s
+124/690 random_040 17.3s
+125/690 random_041 9.1s
+126/690 random_027 108.6s
+127/690 random_044 0.0s
+128/690 random_043 30.3s
+129/690 random_046 15.5s
+130/690 random_047 0.0s
+131/690 random_048 0.0s
+132/690 random_049 20.6s
+133/690 random_042 81.1s
+134/690 random_015 259.0s
+135/690 random_050 80.2s
+136/690 random_052 49.0s
+137/690 random_045 201.0s
+138/690 random_055 1.3s
+ERROR {'instance': 'random_056', 'error': "ValueError('zero-size array to reduction operation maximum which has no identity')"}
+140/690 random_057 0.0s
+141/690 random_058 0.0s
+142/690 random_053 78.3s
+143/690 random_060 53.5s
+144/690 random_061 12.6s
+145/690 random_062 0.0s
+146/690 random_059 87.3s
+147/690 random_064 0.4s
+148/690 random_065 2.4s
+149/690 random_066 0.1s
+Process SpawnPoolWorker-1:
+Traceback (most recent call last):
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/pool.py", line 131, in worker
+    put((job, i, result))
+    ~~~^^^^^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/queues.py", line 397, in put
+    self._writer.send_bytes(obj)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 205, in send_bytes
+    self._send_bytes(m[offset:offset + size])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/pool.py", line 136, in worker
+    put((job, i, (False, wrapped)))
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/queues.py", line 397, in put
+    self._writer.send_bytes(obj)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 205, in send_bytes
+    self._send_bytes(m[offset:offset + size])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+Process SpawnPoolWorker-2:
+Traceback (most recent call last):
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/pool.py", line 131, in worker
+    put((job, i, result))
+    ~~~^^^^^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/queues.py", line 397, in put
+    self._writer.send_bytes(obj)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 205, in send_bytes
+    self._send_bytes(m[offset:offset + size])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/pool.py", line 136, in worker
+    put((job, i, (False, wrapped)))
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/queues.py", line 397, in put
+    self._writer.send_bytes(obj)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 205, in send_bytes
+    self._send_bytes(m[offset:offset + size])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+Process SpawnPoolWorker-4:
+Traceback (most recent call last):
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/pool.py", line 131, in worker
+    put((job, i, result))
+    ~~~^^^^^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/queues.py", line 397, in put
+    self._writer.send_bytes(obj)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 205, in send_bytes
+    self._send_bytes(m[offset:offset + size])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/pool.py", line 136, in worker
+    put((job, i, (False, wrapped)))
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/queues.py", line 397, in put
+    self._writer.send_bytes(obj)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 205, in send_bytes
+    self._send_bytes(m[offset:offset + size])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+/Users/xiyuanma/miniconda3/envs/lt/lib/python3.13/multiprocessing/resource_tracker.py:479: UserWarning: resource_tracker: There appear to be 6 leaked semaphore objects to clean up at shutdown: {'/mp-26iavp0g', '/mp-cx2ytewz', '/mp-mj80e6nt', '/mp-0mch8tp5', '/mp-mx7m_a85', '/mp-meyf2l_k'}
+  warnings.warn(

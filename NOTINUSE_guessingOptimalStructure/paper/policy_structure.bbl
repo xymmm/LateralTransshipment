@@ -1,0 +1,245 @@
+\begin{thebibliography}{37}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Abouee-Mehrizi et~al.(2015)Abouee-Mehrizi, Berman, and
+  Sharma]{abouee2015optimal}
+Hossein Abouee-Mehrizi, Oded Berman, and Shrutivandana Sharma.
+\newblock Optimal joint replenishment and transshipment policies in a
+  multi-period inventory system with lost sales.
+\newblock \emph{Operations Research}, 63\penalty0 (2):\penalty0 342--350, 2015.
+
+\bibitem[Allen(1961)]{allen1961redistribution}
+SG~Allen.
+\newblock A redistribution model with set-up charge.
+\newblock \emph{Management Science}, 8\penalty0 (1):\penalty0 99--108, 1961.
+
+\bibitem[Archibald et~al.(1997)Archibald, Sassen, and
+  Thomas]{archibald1997optimal}
+Tom~W Archibald, SAE Sassen, and LC~Thomas.
+\newblock An optimal policy for a two depot inventory problem with stock
+  transfer.
+\newblock \emph{Management Science}, 43\penalty0 (2):\penalty0 173--183, 1997.
+
+\bibitem[Chen and Lambrecht(1996)]{shaoxiang1996xy}
+Shaoxiang Chen and Marc Lambrecht.
+\newblock X-y band and modified ({s}, {S}) policy.
+\newblock \emph{Operations Research}, 44\penalty0 (6):\penalty0 1013--1019,
+  1996.
+
+\bibitem[Chen and Simchi-Levi(2009)]{chen2009new}
+Xin Chen and David Simchi-Levi.
+\newblock A new approach for the stochastic cash balance problem with fixed
+  costs.
+\newblock \emph{Probability in the Engineering and Informational Sciences},
+  23\penalty0 (4):\penalty0 545--562, 2009.
+
+\bibitem[Chen et~al.(2015)Chen, Gao, and Hu]{chen2015new}
+Xin Chen, Xiangyu Gao, and Zhenyu Hu.
+\newblock A new approach to two-location joint inventory and transshipment
+  control via {$L^{\natural}$}-convexity.
+\newblock \emph{Operations Research Letters}, 43\penalty0 (1):\penalty0 65--68,
+  2015.
+
+\bibitem[Das(1975)]{das1975supply}
+Chandrasekhar Das.
+\newblock Supply and redistribution rules for two-location inventory systems:
+  One-period analysis.
+\newblock \emph{Management Science}, 21\penalty0 (7):\penalty0 765--776, 1975.
+
+\bibitem[Firouzi et~al.(2014)Firouzi, Baglieri, and Jaber]{firouzi2014two}
+Fatemeh Firouzi, Enzo Baglieri, and Mohamad~Y. Jaber.
+\newblock Two-product inventory management with fixed costs and supply
+  uncertainty.
+\newblock \emph{Applied Mathematical Modelling}, 38\penalty0 (23):\penalty0
+  5635--5650, 2014.
+
+\bibitem[Gallego and Scheller-Wolf(2000)]{gallego2000capacitated}
+Guillermo Gallego and Alan Scheller-Wolf.
+\newblock Capacitated inventory problems with fixed order costs: Some optimal
+  policy structure.
+\newblock \emph{European Journal of Operational Research}, 126\penalty0
+  (3):\penalty0 603--613, 2000.
+
+\bibitem[Gallego and Sethi(2005)]{gallego2005k}
+Guillermo Gallego and Suresh~P. Sethi.
+\newblock {$\mathcal{K}$}-convexity in {$\Re^n$}.
+\newblock \emph{Journal of Optimization Theory and Applications}, 127\penalty0
+  (1):\penalty0 71--88, 2005.
+
+\bibitem[Gross(1963)]{gross1963centralized}
+Donald Gross.
+\newblock Centralized inventory control in multilocation supply systems.
+\newblock In Herbert~E Scarf, Dorothy~M Gilford, and Maynard~W Shelly, editors,
+  \emph{Multistage Inventory Models and Techniques}, pages 47--84. Stanford
+  University Press, Stanford, CA, 1963.
+
+\bibitem[Herer and Rashit(1999)]{herer1999lateral}
+Yale~T Herer and Ayelet Rashit.
+\newblock Lateral stock transshipments in a two-location inventory system with
+  fixed and joint replenishment costs.
+\newblock \emph{Naval Research Logistics}, 46\penalty0 (5):\penalty0 525--547,
+  1999.
+
+\bibitem[Herer and Tzur(2001)]{herer2001dynamic}
+Yale~T Herer and Michal Tzur.
+\newblock The dynamic transshipment problem.
+\newblock \emph{Naval Research Logistics}, 48\penalty0 (5):\penalty0 386--408,
+  2001.
+
+\bibitem[Herer and Tzur(2003)]{herer2003optimal}
+Yale~T Herer and Michal Tzur.
+\newblock Optimal and heuristic algorithms for the multi-location dynamic
+  transshipment problem with fixed transshipment costs.
+\newblock \emph{IIE Transactions}, 35\penalty0 (5):\penalty0 419--432, 2003.
+
+\bibitem[Hu et~al.(2008)Hu, Duenyas, and Kapuscinski]{hu2008optimal}
+Xinxin Hu, Izak Duenyas, and Roman Kapuscinski.
+\newblock Optimal joint inventory and transshipment control under uncertain
+  capacity.
+\newblock \emph{Operations Research}, 56\penalty0 (4):\penalty0 881--897, 2008.
+
+\bibitem[Johnson(1967)]{johnson1967optimality}
+Ellis~L. Johnson.
+\newblock Optimality and computation of {$(\sigma, S)$} policies in the
+  multi-item infinite horizon inventory problem.
+\newblock \emph{Management Science}, 13\penalty0 (7):\penalty0 475--491, 1967.
+
+\bibitem[Kalin(1980)]{kalin1980optimality}
+Dieter Kalin.
+\newblock On the optimality of {$(\sigma, S)$} policies.
+\newblock \emph{Mathematics of Operations Research}, 5\penalty0 (2):\penalty0
+  293--307, 1980.
+
+\bibitem[Karmarkar(1981)]{karmarkar1981multiperiod}
+Uday~S Karmarkar.
+\newblock The multiperiod multilocation inventory problem.
+\newblock \emph{Operations Research}, 29\penalty0 (2):\penalty0 215--228, 1981.
+
+\bibitem[Karmarkar and Patel(1977)]{karmarkar1977one}
+Uday~S Karmarkar and Nitin~R Patel.
+\newblock The one-period, n-location distribution problem.
+\newblock \emph{Naval Research Logistics Quarterly}, 24\penalty0 (4):\penalty0
+  559--575, 1977.
+
+\bibitem[Kong et~al.(2024)Kong, Yu, and Wang]{kong2024dynamic}
+Xiangyin Kong, Yimin Yu, and Huihui Wang.
+\newblock Dynamic multi-product procurement with joint and individual setup
+  costs: Theory and insights.
+\newblock \emph{Production and Operations Management}, 33\penalty0
+  (10):\penalty0 2091--2109, 2024.
+
+\bibitem[Li and Yu(2014)]{li2014multimodularity}
+Qing Li and Peiwen Yu.
+\newblock Multimodularity and its applications in three stochastic dynamic
+  inventory problems.
+\newblock \emph{Manufacturing \& Service Operations Management}, 16\penalty0
+  (3):\penalty0 455--463, 2014.
+
+\bibitem[Liang et~al.(2014)Liang, Sethi, Shi, and Zhang]{liang2014inventory}
+Chao Liang, Suresh~P. Sethi, Ruixia Shi, and Jun Zhang.
+\newblock Inventory sharing with transshipment: Impacts of demand distribution
+  shapes and setup costs.
+\newblock \emph{Production and Operations Management}, 23\penalty0
+  (10):\penalty0 1779--1794, 2014.
+
+\bibitem[Ma et~al.(2026)Ma, Rossi, and Archibald]{ma2026computational}
+Xiyuan Ma, Roberto Rossi, and Thomas~W. Archibald.
+\newblock A computational approach to the two-location non-stationary
+  stochastic lot-sizing problem with lateral transshipment.
+\newblock Working paper, 2026.
+
+\bibitem[Neave(1970)]{neave1970stochastic}
+Edwin~H. Neave.
+\newblock The stochastic cash balance problem with fixed costs for increases
+  and decreases.
+\newblock \emph{Management Science}, 16\penalty0 (7):\penalty0 472--490, 1970.
+
+\bibitem[Noham and Tzur(2014)]{noham2014single}
+Reut Noham and Michal Tzur.
+\newblock The single and multi-item transshipment problem with fixed
+  transshipment costs.
+\newblock \emph{Naval Research Logistics}, 61\penalty0 (8):\penalty0 637--664,
+  2014.
+
+\bibitem[Paterson et~al.(2011)Paterson, Kiesm{\"u}ller, Teunter, and
+  Glazebrook]{paterson2011inventory}
+Colin Paterson, Gudrun Kiesm{\"u}ller, Ruud Teunter, and Kevin Glazebrook.
+\newblock Inventory models with lateral transshipments: A review.
+\newblock \emph{European Journal of Operational Research}, 210\penalty0
+  (2):\penalty0 125--136, 2011.
+
+\bibitem[Perera and Sethi(2023)]{perera2023survey}
+Sandun~C. Perera and Suresh~P. Sethi.
+\newblock A survey of stochastic inventory models with fixed costs: Optimality
+  of {$(s, S)$} and {$(s, S)$}-type policies---discrete-time case.
+\newblock \emph{Production and Operations Management}, 32\penalty0
+  (1):\penalty0 131--153, 2023.
+
+\bibitem[Porteus(1971)]{porteus1971optimality}
+Evan~L. Porteus.
+\newblock On the optimality of generalized {$(s, S)$} policies.
+\newblock \emph{Management Science}, 17\penalty0 (7):\penalty0 411--426, 1971.
+
+\bibitem[Puterman(1994)]{puterman1994markov}
+Martin~L. Puterman.
+\newblock \emph{Markov Decision Processes: Discrete Stochastic Dynamic
+  Programming}.
+\newblock John Wiley \& Sons, New York, 1994.
+
+\bibitem[Robinson(1990)]{robinson1990optimal}
+Lawrence~W Robinson.
+\newblock Optimal and approximate policies in multiperiod, multilocation
+  inventory models with transshipments.
+\newblock \emph{Operations Research}, 38\penalty0 (2):\penalty0 278--295, 1990.
+
+\bibitem[Scarf(1960)]{scarf1959optimality}
+Herbert~E. Scarf.
+\newblock {O}ptimality of (${s,S}$) policies in the dynamic inventory problem.
+\newblock In K.~J. Arrow, S.~Karlin, and P.~Suppes, editors, \emph{Mathematical
+  Methods in the Social Sciences}, pages 196--202. Stanford University Press,
+  Stanford, CA, 1960.
+
+\bibitem[Semple(2007)]{semple2007note}
+John Semple.
+\newblock Note: Generalized notions of concavity with an application to
+  capacity management.
+\newblock \emph{Operations Research}, 55\penalty0 (2):\penalty0 284--291, 2007.
+
+\bibitem[Van~Wijk et~al.(2019)Van~Wijk, Adan, and Van~Houtum]{van2019optimal}
+ACC Van~Wijk, Ivo~JBF Adan, and GJ~Van~Houtum.
+\newblock Optimal lateral transshipment policies for a two location inventory
+  problem with multiple demand classes.
+\newblock \emph{European Journal of Operational Research}, 272\penalty0
+  (2):\penalty0 481--495, 2019.
+
+\bibitem[Xu et~al.(2023)Xu, Keblis, Feng, and Zhou]{xu2023optimal}
+Jianjun Xu, Matthew~F. Keblis, Youyi Feng, and Sean~X. Zhou.
+\newblock Optimal replenishment and transshipment management with two
+  locations.
+\newblock \emph{Naval Research Logistics}, 70\penalty0 (4):\penalty0 305--319,
+  2023.
+
+\bibitem[Yang and Qin(2007)]{yang2007capacitated}
+Jian Yang and Zhaoqiong Qin.
+\newblock Capacitated production control with virtual lateral transshipments.
+\newblock \emph{Operations Research}, 55\penalty0 (6):\penalty0 1104--1119,
+  2007.
+
+\bibitem[Ye and Duenyas(2007)]{ye2007optimal}
+Qing Ye and Izak Duenyas.
+\newblock Optimal capacity investment decisions with two-sided fixed-capacity
+  adjustment costs.
+\newblock \emph{Operations Research}, 55\penalty0 (2):\penalty0 272--283, 2007.
+
+\bibitem[Zhou and Wang(2023)]{zhou2023replenishment}
+Zihan Zhou and Xinhui Wang.
+\newblock Replenishment and transshipment in periodic-review systems with a
+  fixed order cost.
+\newblock \emph{European Journal of Operational Research}, 307\penalty0
+  (3):\penalty0 1240--1247, 2023.
+
+\end{thebibliography}
