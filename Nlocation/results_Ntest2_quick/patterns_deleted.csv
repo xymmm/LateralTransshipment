@@ -1,0 +1,3 @@
+id,block,factor,J,T,dist,cv,relation,K,z,R,v,h,b,level,means,lo,hi,levels,states,vectors,hours_estimated
+patterns|3|8|poisson|None|EMP1-EMP2|30|1|5|0.5|1|5|7,patterns,,3,8,poisson,,EMP1-EMP2,30,1,5,0.5,1,5,7,5 11 11 7 4 4 8 6 ; 7 8 5 9 5 9 6 7 ; 5 11 11 7 4 4 8 6,-149,218,368,49836032,44722166165540249112,4.44e+08
+patterns|3|4|poisson|None|EMP1-EMP2|30|1|5|0.5|1|5|7,patterns,,3,4,poisson,,EMP1-EMP2,30,1,5,0.5,1,5,7,8 7 8 5 ; 10 8 5 5 ; 8 7 8 5,-74,120,195,7414875,110936825185409500,1.1e+06

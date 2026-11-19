@@ -1,0 +1,301 @@
+01:28:23  Ntest1: J in (2, 3, 4), mu in (0.25, 0.5, 1, 2, 4, 8), T = 4, costs {'K': 20, 'z': 1, 'R': 10, 'v': 0.5, 'h': 1, 'b': 5}, time limit 1800 s, 7 runs at the same time
+01:28:23  instance J=2 mu=0.25: levels [-14, 9], 576 states, 4.761e+03 shipment vectors, 2.406e+03 net inflows per period
+01:28:23  instance J=2 mu=0.5: levels [-20, 13], 1,156 states, 1.562e+04 shipment vectors, 6.434e+03 net inflows per period
+01:28:23  instance J=2 mu=1: levels [-26, 20], 2,209 states, 6.605e+04 shipment vectors, 1.887e+04 net inflows per period
+01:28:23  instance J=2 mu=2: levels [-34, 33], 4,624 states, 3.956e+05 shipment vectors, 6.783e+04 net inflows per period
+01:28:23  instance J=2 mu=4: levels [-52, 55], 11,664 states, 2.716e+06 shipment vectors, 2.858e+05 net inflows per period
+01:28:23  instance J=2 mu=8: levels [-80, 96], 31,329 states, 2.336e+07 shipment vectors, 1.375e+06 net inflows per period
+01:28:23  instance J=3 mu=0.25: levels [-14, 11], 17,576 states, 5.401e+07 shipment vectors, 8.078e+05 net inflows per period
+01:28:23  instance J=3 mu=0.5: levels [-20, 17], 54,872 states, 1.561e+09 shipment vectors, 5.636e+06 net inflows per period
+01:28:23  instance J=3 mu=1: levels [-26, 27], 157,464 states, 6.822e+10 shipment vectors, 4.184e+07 net inflows per period
+01:28:23  instance J=3 mu=2: levels [-34, 44], 493,039 states, 4.290e+12 shipment vectors, 3.654e+08 net inflows per period
+01:28:23  instance J=3 mu=4: levels [-52, 76], 2,146,689 states, 4.955e+14 shipment vectors, 4.829e+09 net inflows per period
+01:28:23  instance J=3 mu=8: levels [-80, 135], 10,077,696 states, 7.874e+16 shipment vectors, 7.392e+10 net inflows per period
+01:28:23  instance J=4 mu=0.25: levels [-14, 13], 614,656 states, 3.285e+13 shipment vectors, 4.546e+08 net inflows per period
+01:28:23  instance J=4 mu=0.5: levels [-20, 20], 2,825,761 states, 1.285e+16 shipment vectors, 7.046e+09 net inflows per period
+01:28:23  instance J=4 mu=1: levels [-26, 33], 12,960,000 states, 1.906e+19 shipment vectors, 1.516e+11 net inflows per period
+01:28:23  instance J=4 mu=2: levels [-34, 55], 65,610,000 states, 4.292e+22 shipment vectors, 3.772e+12 net inflows per period
+01:28:23  instance J=4 mu=4: levels [-52, 96], 492,884,401 states, 2.364e+26 shipment vectors, 1.537e+14 net inflows per period
+01:28:24  instance J=4 mu=8: levels [-80, 172], 4,097,152,081 states, 2.227e+30 shipment vectors, 7.601e+15 net inflows per period
+01:28:24  start    SDP1     J=2 mu=0.25
+01:28:24  start    SDP2     J=2 mu=0.25
+01:28:24  start    SDP1     J=3 mu=0.25
+01:28:24  start    SDP2net  J=2 mu=0.25
+01:28:24  start    SDP2net  J=4 mu=0.25
+01:28:24  start    SDP2net  J=3 mu=0.25
+01:28:24  start    SDP2     J=3 mu=0.25
+01:28:24  solved   SDP2     J=2 mu=0.25   0.04 s
+01:28:24  start    SDP2     J=2 mu=0.5
+01:28:24  solved   SDP2net  J=2 mu=0.25   0.05 s
+01:28:24  start    SDP2net  J=2 mu=0.5
+01:28:24  solved   SDP1     J=2 mu=0.25   0.08 s
+01:28:24  start    SDP1     J=2 mu=0.5
+01:28:25  solved   SDP2     J=2 mu=0.5   0.08 s
+01:28:25  start    SDP2     J=2 mu=1
+01:28:25  solved   SDP2net  J=2 mu=0.5   0.10 s
+01:28:25  start    SDP2net  J=2 mu=1
+01:28:25  solved   SDP1     J=2 mu=0.5   0.19 s
+01:28:25  start    SDP1     J=2 mu=1
+01:28:26  solved   SDP2     J=2 mu=1   0.18 s
+01:28:26  start    SDP2     J=2 mu=2
+01:28:26  solved   SDP2net  J=2 mu=1   0.19 s
+01:28:26  start    SDP2net  J=2 mu=2
+01:28:27  solved   SDP1     J=2 mu=1   0.49 s
+01:28:27  start    SDP1     J=2 mu=2
+01:28:28  solved   SDP2     J=2 mu=2   0.46 s
+01:28:28  start    SDP2     J=2 mu=4
+01:28:28  solved   SDP2net  J=2 mu=2   0.42 s
+01:28:28  start    SDP2net  J=2 mu=4
+01:28:31  solved   SDP2net  J=3 mu=0.25   2.29 s
+01:28:31  start    SDP2net  J=3 mu=0.5
+01:28:32  solved   SDP2net  J=2 mu=4   1.17 s
+01:28:32  start    SDP2net  J=2 mu=8
+01:28:33  solved   SDP1     J=2 mu=2   1.65 s
+01:28:33  start    SDP1     J=2 mu=4
+01:28:33  solved   SDP2     J=2 mu=4   1.64 s
+01:28:33  start    SDP2     J=2 mu=8
+01:28:34  solved   SDP2     J=3 mu=0.25   10.43 s
+01:28:34  start    SDP2     J=3 mu=0.5
+01:28:44  solved   SDP2net  J=2 mu=8   3.99 s
+01:28:54  solved   SDP1     J=3 mu=0.25   30.18 s
+01:28:54  start    SDP1     J=3 mu=0.5
+01:28:57  solved   SDP1     J=2 mu=4   7.95 s
+01:28:57  start    SDP1     J=2 mu=8
+01:28:58  solved   SDP2     J=2 mu=8   8.01 s
+01:29:00  solved   SDP2net  J=3 mu=0.5   9.45 s
+01:29:00  start    SDP2net  J=3 mu=1
+01:29:46  solved   SDP2net  J=3 mu=1   45.96 s
+01:29:46  start    SDP2net  J=3 mu=2
+01:29:56  solved   SDP1     J=2 mu=8   58.54 s
+01:32:18  solved   SDP2     J=3 mu=0.5   222.59 s
+01:32:18  start    SDP2     J=3 mu=1
+01:35:45  solved   SDP2net  J=3 mu=2   358.42 s
+01:35:45  start    SDP2net  J=3 mu=4
+01:37:30  solved   SDP1     J=3 mu=0.5   515.25 s
+01:37:30  start    SDP1     J=3 mu=1
+01:39:13  solved   SDP2net  J=4 mu=0.25   649.14 s
+01:39:13  start    SDP2net  J=4 mu=0.5
+02:03:18  time limit SDP2     J=3 mu=1   1860.11 s
+02:03:18  not run  SDP2     J=3 mu=2   a lower demand level reached the time limit
+02:03:18  not run  SDP2     J=3 mu=4   a lower demand level reached the time limit
+02:03:18  not run  SDP2     J=3 mu=8   a lower demand level reached the time limit
+02:03:18  not run  SDP2     J=4 mu=0.25   at least as many shipment vectors as an instance at the time limit
+02:03:18  not run  SDP2     J=4 mu=0.5   at least as many shipment vectors as an instance at the time limit
+02:03:18  not run  SDP2     J=4 mu=1   at least as many shipment vectors as an instance at the time limit
+02:03:18  not run  SDP2     J=4 mu=2   at least as many shipment vectors as an instance at the time limit
+02:03:18  not run  SDP2     J=4 mu=4   at least as many shipment vectors as an instance at the time limit
+02:03:18  not run  SDP2     J=4 mu=8   at least as many shipment vectors as an instance at the time limit
+02:06:45  time limit SDP2net  J=3 mu=4   1860.02 s
+02:06:45  not run  SDP2net  J=3 mu=8   a lower demand level reached the time limit
+02:08:30  time limit SDP1     J=3 mu=1   1860.14 s
+02:08:30  not run  SDP1     J=3 mu=2   a lower demand level reached the time limit
+02:08:30  not run  SDP1     J=3 mu=4   a lower demand level reached the time limit
+02:08:30  not run  SDP1     J=3 mu=8   a lower demand level reached the time limit
+02:08:30  not run  SDP1     J=4 mu=0.25   at least as many shipment vectors as an instance at the time limit
+02:08:30  not run  SDP1     J=4 mu=0.5   at least as many shipment vectors as an instance at the time limit
+02:08:30  not run  SDP1     J=4 mu=1   at least as many shipment vectors as an instance at the time limit
+02:08:30  not run  SDP1     J=4 mu=2   at least as many shipment vectors as an instance at the time limit
+02:08:30  not run  SDP1     J=4 mu=4   at least as many shipment vectors as an instance at the time limit
+02:08:30  not run  SDP1     J=4 mu=8   at least as many shipment vectors as an instance at the time limit
+02:10:13  time limit SDP2net  J=4 mu=0.5   1860.01 s
+02:10:13  not run  SDP2net  J=4 mu=1   a lower demand level reached the time limit
+02:10:13  not run  SDP2net  J=4 mu=2   a lower demand level reached the time limit
+02:10:13  not run  SDP2net  J=4 mu=4   a lower demand level reached the time limit
+02:10:13  not run  SDP2net  J=4 mu=8   a lower demand level reached the time limit
+02:10:13  start    check    J=2 mu=0.25
+02:10:13  start    check    J=2 mu=0.5
+02:10:13  start    check    J=2 mu=1
+02:10:13  start    check    J=2 mu=2
+02:10:13  start    check    J=2 mu=4
+02:10:13  start    check    J=2 mu=8
+02:10:13  start    check    J=3 mu=0.25
+02:10:14  start    check    J=3 mu=0.5
+02:10:14  start    check    J=3 mu=1
+02:10:14  checked  check    J=2 mu=0.5   0.74 s
+02:10:14  checked  check    J=2 mu=0.25   0.74 s
+02:10:14  start    check    J=3 mu=2
+02:10:14  start    check    J=4 mu=0.25
+02:10:14  checked  check    J=2 mu=1   0.75 s
+02:10:14  checked  check    J=2 mu=2   0.75 s
+02:10:14  checked  check    J=2 mu=4   0.77 s
+02:10:14  checked  check    J=3 mu=0.25   0.78 s
+02:10:14  checked  check    J=2 mu=8   0.84 s
+02:10:15  checked  check    J=3 mu=0.5   0.70 s
+02:10:16  checked  check    J=3 mu=1   1.62 s
+02:10:24  checked  check    J=3 mu=2   9.97 s
+02:10:36  checked  check    J=4 mu=0.25   21.95 s
+02:10:36  finished in 2532 s
+02:10:36  J=2 mu=0.25: SDP1 0.08317141700536013, SDP2 0.03915520804002881, SDP2net 0.04857887502294034, value 24.144259206189822, largest difference 0.0, widened 24.144259206189822
+02:10:36  J=2 mu=0.5: SDP1 0.1926501669222489, SDP2 0.08201429201290011, SDP2net 0.09838224994018674, value 44.92413510816262, largest difference 0.0, widened 44.92413510816261
+02:10:36  J=2 mu=1: SDP1 0.49133862496819347, SDP2 0.17558275000192225, SDP2net 0.19186083402018994, value 67.11882746025792, largest difference 0.0, widened 67.11882746025792
+02:10:36  J=2 mu=2: SDP1 1.6487188750179484, SDP2 0.4626084170304239, SDP2net 0.42092129099182785, value 94.2574632639819, largest difference 0.0, widened 94.2574632639819
+02:10:36  J=2 mu=4: SDP1 7.947191374958493, SDP2 1.642815166967921, SDP2net 1.1658492080168799, value 135.8310345283254, largest difference 0.0, widened 135.8310345283254
+02:10:36  J=2 mu=8: SDP1 58.53739345900249, SDP2 8.007737666950561, SDP2net 3.990153416991234, value 207.05427681677418, largest difference 0.0, widened 207.05427681677418
+02:10:36  J=3 mu=0.25: SDP1 30.178114291979, SDP2 10.42621395806782, SDP2net 2.2932298330124468, value 35.20319754700924, largest difference 0.0, widened 35.20319754700924
+02:10:36  J=3 mu=0.5: SDP1 515.2456211670069, SDP2 222.58665991702583, SDP2net 9.449056916986592, value 65.45223320878236, largest difference 0.0, widened 65.45223320878233
+02:10:36  J=3 mu=1: SDP1 time limit, SDP2 time limit, SDP2net 45.96459904196672, value 97.93721322012519, largest difference 0.0, widened 97.93721322012519
+02:10:36  J=3 mu=2: SDP1 not run, SDP2 not run, SDP2net 358.41743754106574, value 139.69710267735854, largest difference 0.0, widened 139.69710267735854
+02:10:36  J=3 mu=4: SDP1 not run, SDP2 not run, SDP2net time limit, value None, largest difference None, widened None
+02:10:36  J=3 mu=8: SDP1 not run, SDP2 not run, SDP2net not run, value None, largest difference None, widened None
+02:10:36  J=4 mu=0.25: SDP1 not run, SDP2 not run, SDP2net 649.1396308330586, value 48.28138234855128, largest difference 0.0, widened 48.28138234855128
+02:10:36  J=4 mu=0.5: SDP1 not run, SDP2 not run, SDP2net time limit, value None, largest difference None, widened None
+02:10:36  J=4 mu=1: SDP1 not run, SDP2 not run, SDP2net not run, value None, largest difference None, widened None
+02:10:36  J=4 mu=2: SDP1 not run, SDP2 not run, SDP2net not run, value None, largest difference None, widened None
+02:10:36  J=4 mu=4: SDP1 not run, SDP2 not run, SDP2net not run, value None, largest difference None, widened None
+02:10:36  J=4 mu=8: SDP1 not run, SDP2 not run, SDP2net not run, value None, largest difference None, widened None
+02:13:01  Ntest1: J in (2, 3, 4), mu in (0.25, 0.5, 1, 2, 4, 8), T = 4, costs {'K': 20, 'z': 1, 'R': 10, 'v': 0.5, 'h': 1, 'b': 5}, time limit 1800 s, 7 runs at the same time, 54 earlier runs on record
+02:13:01  instance J=2 mu=0.25: levels [-14, 9], 576 states, 4.761e+03 shipment vectors, 2.406e+03 net inflows per period
+02:13:01  instance J=2 mu=0.5: levels [-20, 13], 1,156 states, 1.562e+04 shipment vectors, 6.434e+03 net inflows per period
+02:13:01  instance J=2 mu=1: levels [-26, 20], 2,209 states, 6.605e+04 shipment vectors, 1.887e+04 net inflows per period
+02:13:01  instance J=2 mu=2: levels [-34, 33], 4,624 states, 3.956e+05 shipment vectors, 6.783e+04 net inflows per period
+02:13:01  instance J=2 mu=4: levels [-52, 55], 11,664 states, 2.716e+06 shipment vectors, 2.858e+05 net inflows per period
+02:13:01  instance J=2 mu=8: levels [-80, 96], 31,329 states, 2.336e+07 shipment vectors, 1.375e+06 net inflows per period
+02:13:01  instance J=3 mu=0.25: levels [-14, 11], 17,576 states, 5.401e+07 shipment vectors, 8.078e+05 net inflows per period
+02:13:01  instance J=3 mu=0.5: levels [-20, 17], 54,872 states, 1.561e+09 shipment vectors, 5.636e+06 net inflows per period
+02:13:01  instance J=3 mu=1: levels [-26, 27], 157,464 states, 6.822e+10 shipment vectors, 4.184e+07 net inflows per period
+02:13:01  instance J=3 mu=2: levels [-34, 44], 493,039 states, 4.290e+12 shipment vectors, 3.654e+08 net inflows per period
+02:13:01  instance J=3 mu=4: levels [-52, 76], 2,146,689 states, 4.955e+14 shipment vectors, 4.829e+09 net inflows per period
+02:13:01  instance J=3 mu=8: levels [-80, 135], 10,077,696 states, 7.874e+16 shipment vectors, 7.392e+10 net inflows per period
+02:13:01  instance J=4 mu=0.25: levels [-14, 13], 614,656 states, 3.285e+13 shipment vectors, 4.546e+08 net inflows per period
+02:13:01  instance J=4 mu=0.5: levels [-20, 20], 2,825,761 states, 1.285e+16 shipment vectors, 7.046e+09 net inflows per period
+02:13:01  instance J=4 mu=1: levels [-26, 33], 12,960,000 states, 1.906e+19 shipment vectors, 1.516e+11 net inflows per period
+02:13:01  instance J=4 mu=2: levels [-34, 55], 65,610,000 states, 4.292e+22 shipment vectors, 3.772e+12 net inflows per period
+02:13:01  instance J=4 mu=4: levels [-52, 96], 492,884,401 states, 2.364e+26 shipment vectors, 1.537e+14 net inflows per period
+02:13:01  instance J=4 mu=8: levels [-80, 172], 4,097,152,081 states, 2.227e+30 shipment vectors, 7.601e+15 net inflows per period
+02:13:01  kept     SDP2      J=2 mu=0.25   solved
+02:13:01  kept     SDP2      J=2 mu=0.5   solved
+02:13:01  kept     SDP2      J=2 mu=1   solved
+02:13:01  kept     SDP2      J=2 mu=2   solved
+02:13:01  kept     SDP2      J=2 mu=4   solved
+02:13:01  kept     SDP2      J=2 mu=8   solved
+02:13:01  start    SDP2quick J=2 mu=0.25
+02:13:01  kept     SDP2net   J=2 mu=0.25   solved
+02:13:01  kept     SDP1      J=3 mu=0.25   solved
+02:13:01  kept     SDP2      J=3 mu=0.25   solved
+02:13:01  kept     SDP2net   J=4 mu=0.25   solved
+02:13:01  kept     SDP2net   J=3 mu=0.25   solved
+02:13:01  kept     SDP1      J=2 mu=0.25   solved
+02:13:01  start    SDP2quick J=3 mu=0.25
+02:13:01  start    SDP2quick J=4 mu=0.25
+02:13:01  kept     SDP1      J=3 mu=0.5   solved
+02:13:01  kept     SDP2net   J=2 mu=0.5   solved
+02:13:01  kept     SDP2net   J=4 mu=0.5   time limit
+02:13:01  kept     SDP2net   J=3 mu=0.5   solved
+02:13:01  kept     SDP1      J=2 mu=0.5   solved
+02:13:02  kept     SDP2      J=3 mu=0.5   solved
+02:13:02  kept     SDP2      J=3 mu=1   time limit
+02:13:02  kept     SDP1      J=2 mu=1   solved
+02:13:02  kept     SDP1      J=3 mu=1   time limit
+02:13:02  not run  SDP2      J=3 mu=2   a lower demand level reached the time limit
+02:13:02  not run  SDP2      J=3 mu=4   a lower demand level reached the time limit
+02:13:02  kept     SDP2net   J=2 mu=1   solved
+02:13:02  not run  SDP2net   J=4 mu=1   a lower demand level reached the time limit
+02:13:02  not run  SDP2net   J=4 mu=2   a lower demand level reached the time limit
+02:13:02  kept     SDP2net   J=3 mu=1   solved
+02:13:02  kept     SDP1      J=2 mu=2   solved
+02:13:02  not run  SDP2net   J=4 mu=4   a lower demand level reached the time limit
+02:13:02  not run  SDP2      J=3 mu=8   a lower demand level reached the time limit
+02:13:02  kept     SDP2net   J=3 mu=2   solved
+02:13:02  kept     SDP2net   J=2 mu=2   solved
+02:13:02  not run  SDP1      J=3 mu=2   a lower demand level reached the time limit
+02:13:02  not run  SDP1      J=3 mu=4   a lower demand level reached the time limit
+02:13:02  not run  SDP1      J=3 mu=8   a lower demand level reached the time limit
+02:13:02  not run  SDP1      J=4 mu=0.25   at least as many shipment vectors as an instance at the time limit
+02:13:02  not run  SDP1      J=4 mu=0.5   at least as many shipment vectors as an instance at the time limit
+02:13:02  kept     SDP1      J=2 mu=4   solved
+02:13:02  not run  SDP1      J=4 mu=1   at least as many shipment vectors as an instance at the time limit
+02:13:02  not run  SDP1      J=4 mu=2   at least as many shipment vectors as an instance at the time limit
+02:13:02  not run  SDP1      J=4 mu=4   at least as many shipment vectors as an instance at the time limit
+02:13:02  not run  SDP2net   J=4 mu=8   a lower demand level reached the time limit
+02:13:02  not run  SDP2      J=4 mu=0.25   at least as many shipment vectors as an instance at the time limit
+02:13:02  kept     SDP2net   J=3 mu=4   time limit
+02:13:02  not run  SDP2net   J=3 mu=8   a lower demand level reached the time limit
+02:13:02  kept     SDP2net   J=2 mu=4   solved
+02:13:02  kept     SDP1      J=2 mu=8   solved
+02:13:02  not run  SDP1      J=4 mu=8   at least as many shipment vectors as an instance at the time limit
+02:13:02  not run  SDP2      J=4 mu=0.5   at least as many shipment vectors as an instance at the time limit
+02:13:02  not run  SDP2      J=4 mu=1   at least as many shipment vectors as an instance at the time limit
+02:13:02  kept     SDP2net   J=2 mu=8   solved
+02:13:02  not run  SDP2      J=4 mu=2   at least as many shipment vectors as an instance at the time limit
+02:13:02  not run  SDP2      J=4 mu=4   at least as many shipment vectors as an instance at the time limit
+02:13:02  not run  SDP2      J=4 mu=8   at least as many shipment vectors as an instance at the time limit
+02:13:02  solved   SDP2quick J=2 mu=0.25   0.00 s
+02:13:02  start    SDP2quick J=2 mu=0.5
+02:13:02  solved   SDP2quick J=3 mu=0.25   0.01 s
+02:13:02  start    SDP2quick J=3 mu=0.5
+02:13:02  solved   SDP2quick J=2 mu=0.5   0.00 s
+02:13:02  start    SDP2quick J=2 mu=1
+02:13:03  solved   SDP2quick J=3 mu=0.5   0.04 s
+02:13:03  start    SDP2quick J=3 mu=1
+02:13:03  solved   SDP2quick J=2 mu=1   0.00 s
+02:13:03  start    SDP2quick J=2 mu=2
+02:13:03  solved   SDP2quick J=2 mu=2   0.00 s
+02:13:03  start    SDP2quick J=2 mu=4
+02:13:04  solved   SDP2quick J=3 mu=1   0.16 s
+02:13:04  start    SDP2quick J=3 mu=2
+02:13:04  solved   SDP2quick J=2 mu=4   0.01 s
+02:13:04  start    SDP2quick J=2 mu=8
+02:13:04  solved   SDP2quick J=4 mu=0.25   0.75 s
+02:13:04  start    SDP2quick J=4 mu=0.5
+02:13:05  solved   SDP2quick J=2 mu=8   0.04 s
+02:13:06  solved   SDP2quick J=3 mu=2   0.80 s
+02:13:06  start    SDP2quick J=3 mu=4
+02:13:22  solved   SDP2quick J=4 mu=0.5   5.80 s
+02:13:22  start    SDP2quick J=4 mu=1
+02:13:22  solved   SDP2quick J=3 mu=4   5.00 s
+02:13:22  start    SDP2quick J=3 mu=8
+02:14:06  solved   SDP2quick J=3 mu=8   43.77 s
+02:14:08  solved   SDP2quick J=4 mu=1   45.92 s
+02:14:08  start    SDP2quick J=4 mu=2
+02:18:51  solved   SDP2quick J=4 mu=2   282.26 s
+02:18:51  not run  SDP2quick J=4 mu=4   its tables need more than 16 GB
+02:18:51  not run  SDP2quick J=4 mu=8   its tables need more than 16 GB
+02:18:51  start    check     J=2 mu=0.25
+02:18:51  start    check     J=2 mu=0.5
+02:18:51  start    check     J=2 mu=2
+02:18:51  start    check     J=2 mu=4
+02:18:51  start    check     J=2 mu=1
+02:18:51  start    check     J=2 mu=8
+02:18:51  start    check     J=3 mu=0.25
+02:18:52  start    check     J=3 mu=0.5
+02:18:52  checked  check     J=2 mu=0.5   0.50 s
+02:18:52  checked  check     J=2 mu=0.25   0.50 s
+02:18:52  start    check     J=3 mu=1
+02:18:52  start    check     J=3 mu=2
+02:18:52  checked  check     J=2 mu=1   0.50 s
+02:18:52  start    check     J=3 mu=4
+02:18:52  checked  check     J=2 mu=2   0.51 s
+02:18:52  start    check     J=3 mu=8
+02:18:52  checked  check     J=2 mu=4   0.52 s
+02:18:52  start    check     J=4 mu=0.25
+02:18:52  checked  check     J=3 mu=0.25   0.52 s
+02:18:52  start    check     J=4 mu=0.5
+02:18:52  checked  check     J=2 mu=8   0.56 s
+02:18:52  start    check     J=4 mu=1
+02:18:52  checked  check     J=3 mu=0.5   0.65 s
+02:18:53  checked  check     J=3 mu=1   1.02 s
+02:18:55  checked  check     J=3 mu=2   3.03 s
+02:18:56  checked  check     J=4 mu=0.25   4.11 s
+02:19:07  checked  check     J=3 mu=4   14.71 s
+02:19:14  checked  check     J=4 mu=0.5   22.05 s
+02:20:49  checked  check     J=3 mu=8   116.89 s
+02:21:17  checked  check     J=4 mu=1   144.95 s
+02:21:17  finished in 496 s
+02:21:17  J=2 mu=0.25: SDP1 0.08317141700536013, SDP2 0.03915520804002881, SDP2net 0.04857887502294034, SDP2quick 0.0015403329161927104, value 24.144259206189822, largest difference 0.0, widened 24.144259206189822
+02:21:17  J=2 mu=0.5: SDP1 0.1926501669222489, SDP2 0.08201429201290011, SDP2net 0.09838224994018674, SDP2quick 0.0019623750122264028, value 44.92413510816262, largest difference 1.4210854715202004e-14, widened 44.92413510816261
+02:21:17  J=2 mu=1: SDP1 0.49133862496819347, SDP2 0.17558275000192225, SDP2net 0.19186083402018994, SDP2quick 0.002757917041890323, value 67.11882746025792, largest difference 0.0, widened 67.11882746025792
+02:21:17  J=2 mu=2: SDP1 1.6487188750179484, SDP2 0.4626084170304239, SDP2net 0.42092129099182785, SDP2quick 0.004788082907907665, value 94.2574632639819, largest difference 0.0, widened 94.2574632639819
+02:21:17  J=2 mu=4: SDP1 7.947191374958493, SDP2 1.642815166967921, SDP2net 1.1658492080168799, SDP2quick 0.01164308306761086, value 135.8310345283254, largest difference 0.0, widened 135.8310345283254
+02:21:17  J=2 mu=8: SDP1 58.53739345900249, SDP2 8.007737666950561, SDP2net 3.990153416991234, SDP2quick 0.038798041990958154, value 207.05427681677418, largest difference 0.0, widened 207.05427681677418
+02:21:17  J=3 mu=0.25: SDP1 30.178114291979, SDP2 10.42621395806782, SDP2net 2.2932298330124468, SDP2quick 0.012989250011742115, value 35.20319754700924, largest difference 1.4210854715202004e-14, widened 35.20319754700924
+02:21:17  J=3 mu=0.5: SDP1 515.2456211670069, SDP2 222.58665991702583, SDP2net 9.449056916986592, SDP2quick 0.04314850002992898, value 65.45223320878236, largest difference 1.4210854715202004e-14, widened 65.45223320878233
+02:21:17  J=3 mu=1: SDP1 time limit, SDP2 time limit, SDP2net 45.96459904196672, SDP2quick 0.15891062503214926, value 97.93721322012519, largest difference 2.842170943040401e-14, widened 97.93721322012519
+02:21:17  J=3 mu=2: SDP1 not run, SDP2 not run, SDP2net 358.41743754106574, SDP2quick 0.7952691669343039, value 139.69710267735854, largest difference 2.842170943040401e-14, widened 139.69710267735854
+02:21:17  J=3 mu=4: SDP1 not run, SDP2 not run, SDP2net time limit, SDP2quick 4.996809500036761, value 203.65434379654434, largest difference None, widened 203.65434379654442
+02:21:17  J=3 mu=8: SDP1 not run, SDP2 not run, SDP2net not run, SDP2quick 43.772899082978256, value 315.0942503167212, largest difference None, widened 315.0942503167212
+02:21:17  J=4 mu=0.25: SDP1 not run, SDP2 not run, SDP2net 649.1396308330586, SDP2quick 0.750744666904211, value 48.28138234855128, largest difference 2.842170943040401e-14, widened 48.28138234855128
+02:21:17  J=4 mu=0.5: SDP1 not run, SDP2 not run, SDP2net time limit, SDP2quick 5.802473915973678, value 88.99775673550192, largest difference None, widened 88.99775673550185
+02:21:17  J=4 mu=1: SDP1 not run, SDP2 not run, SDP2net not run, SDP2quick 45.92404883308336, value 133.48301254524688, largest difference None, widened 133.48301254524688
+02:21:17  J=4 mu=2: SDP1 not run, SDP2 not run, SDP2net not run, SDP2quick 282.26479829102755, value 187.11970072416767, largest difference None, widened None
+02:21:17  J=4 mu=4: SDP1 not run, SDP2 not run, SDP2net not run, SDP2quick not run, value None, largest difference None, widened None
+02:21:17  J=4 mu=8: SDP1 not run, SDP2 not run, SDP2net not run, SDP2quick not run, value None, largest difference None, widened None
