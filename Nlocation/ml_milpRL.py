@@ -21,7 +21,8 @@ Times are kept apart
     seconds_build        making the solver models, one per period k
     seconds_milp         step 1, all decisions computed
     seconds_refine       step 3, all decisions computed
-    seconds_decision_k1  step 1 plus step 3 of the decision at k = 1, the longest residual horizon
+    seconds_decision_k1  full uncached decision at k = 1, including model construction and refinement
+    decision_reports    solver status, optimality gap, bound and component times for every computed decision
 
     from ml_milpRL import milpRL
     r = milpRL([[1, 1, 1], [1, 2, 1], [2, 1, 1]], K=5, z=1, R=1, v=0.5, h=1, b=5)
@@ -279,7 +280,8 @@ class MilpRLPolicy:
         self.time_build = 0.0           # making the solver models
         self.time_milp = 0.0            # step 1
         self.time_refine = 0.0          # step 3
-        self.decision_times = []        # (k, seconds) of each decision computed: step 1 plus step 3
+        self.decision_times = []        # (k, full wall time) of each uncached decision, including model construction
+        self.decision_reports = []     # solver outcomes and timing components for every computed decision
         self.last = {}                  # times of the last decision computed
 
     # -- step 0 ----------------------------------------------------------------------------------------
@@ -333,6 +335,8 @@ class MilpRLPolicy:
         hit = self.cache.get(key)
         if hit is not None:
             return hit
+        started = time.perf_counter()
+        build_before = self.time_build
         mdl = self.milp(k)
         plan = mdl.solve(state)                                               # step 1
         self.time_milp += plan.seconds
@@ -347,12 +351,12 @@ class MilpRLPolicy:
         dec = (delta, tuple(int(q) for q in plan.Q[0]))                       # step 2: the reorders of period k
         self.cache[key] = dec
         self.plans[key] = plan
-        self.decision_times.append((k, plan.seconds + t_ref))
-        try:
-            gap = float(mdl.model.MIPGap)
-        except (AttributeError, gp.GurobiError):
-            gap = float("nan")
-        self.last = dict(k=k, seconds_milp=plan.seconds, seconds_refine=t_ref, mip_gap=gap)
+        elapsed = time.perf_counter() - started
+        self.decision_times.append((k, elapsed))
+        self.last = dict(k=k, state=state, seconds=elapsed, seconds_build=self.time_build - build_before,
+                         seconds_milp=plan.seconds, seconds_refine=t_ref, status=plan.status,
+                         mip_gap=plan.mip_gap, objective=plan.obj, obj_bound=plan.obj_bound)
+        self.decision_reports.append(self.last.copy())
         return dec
 
     def dispose(self):
@@ -378,8 +382,8 @@ class MilpRLResult:
     seconds_refine: float            # step 3, all decisions
     seconds_total: float             # wall time of the whole call
     n_decisions: int                 # distinct (k, state) pairs at which a decision was computed
-    seconds_per_decision: float      # mean of step 1 plus step 3 over these decisions
-    seconds_decision_k1: float       # step 1 plus step 3 at k = 1
+    seconds_per_decision: float      # mean full uncached decision time, including model construction
+    seconds_decision_k1: float       # full uncached decision time at k = 1
     entries_computed: int            # cumulative demands computed in step 0
     entries_reused: int
     policy: MilpRLPolicy = field(repr=False)

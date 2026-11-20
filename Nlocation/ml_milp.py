@@ -107,13 +107,16 @@ class _Coefficients:
 
 @dataclass
 class MILPSolution:
-    """Optimal decisions over periods k..T; index s refers to period k + s, locations are counted from 0."""
+    """Best plan found over periods k..T, with its solver status and bound."""
     k: int
     opening: tuple
     W: np.ndarray               # W[s, j, m] units from j to m
     Q: np.ndarray               # Q[s, j]
     obj: float
     seconds: float
+    status: int = 0
+    mip_gap: float = float("nan")
+    obj_bound: float = float("nan")
 
     def net_inflow(self) -> np.ndarray:
         """net[s, j] = sum_m W[s, m, j] - sum_m W[s, j, m]."""
@@ -218,7 +221,9 @@ class MILP:
                 for mm in range(J):
                     if mm != j:
                         W[s, j, mm] = int(round(self.W[j, mm, s].X))
-        return MILPSolution(self.k, tuple(opening), W, Q, self.model.ObjVal, time.perf_counter() - t0)
+        return MILPSolution(self.k, tuple(opening), W, Q, self.model.ObjVal, time.perf_counter() - t0,
+                            status=int(self.model.Status), mip_gap=float(self.model.MIPGap),
+                            obj_bound=float(self.model.ObjBound))
 
 
 def solve_static(demand_means: Sequence[Sequence[float]], K: float, z: float, R: float, v: float, h: float, b: float,
